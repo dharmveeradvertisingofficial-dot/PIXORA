@@ -29,3 +29,49 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   margin: 0 !important;
 }
+/* Profile icon perfectly round, borderless */
+.profile-dot, #profileMenuButton {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  background: transparent;
+}
+
+/* Big clean mobile logo */
+.topbar-logo {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.topbar-logo img {
+  display: block;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+}
+.sidebar-overlay.active {
+  display: block;
+}
+.sidebar {
+  z-index: 100;
+}
