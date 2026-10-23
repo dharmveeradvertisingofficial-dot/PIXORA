@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="mr">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,126 +9,172 @@
   <link rel="icon" href="assets/pixora-logo.png">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Account Page साठी लागणारे सोपे आणि आकर्षक CSS */
-    .auth-container {
-      max-width: 480px;
-      margin: 2rem auto;
-      background: #ffffff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      border: 1px solid #e0e0e0;
+    /* Light Theme Styling (PIXORA Cream Theme) */
+    body {
+      background-color: #FFF8E1 !important; /* Screenshot 2 background color */
+      color: #1A1A1A;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
-    .auth-tabs {
+
+    .auth-wrapper {
+      max-width: 420px;
+      margin: 2rem auto;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .brand-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.5rem;
+      color: #1A1A1A;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .auth-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #1A1A1A;
+    }
+
+    .auth-subtitle {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    /* Role Toggle Buttons */
+    .role-toggle {
       display: flex;
-      border-bottom: 2px solid #eee;
+      background: #EFE8D5;
+      padding: 4px;
+      border-radius: 10px;
       margin-bottom: 1.5rem;
     }
-    .auth-tab {
+
+    .role-btn {
       flex: 1;
-      padding: 0.75rem;
-      text-align: center;
-      background: none;
+      padding: 10px;
       border: none;
+      background: transparent;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.85rem;
+      border-radius: 8px;
       cursor: pointer;
-      color: #666;
+      color: #555;
+      transition: all 0.2s ease;
     }
-    .auth-tab.active {
-      color: #ff6f00;
-      border-bottom: 3px solid #ff6f00;
+
+    .role-btn.active {
+      background: #FFFFFF;
+      color: #1A1A1A;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
+
+    /* Input & Button Styling (Screenshot 1 Layout) */
     .form-group {
-      margin-bottom: 1.25rem;
-      display: flex;
-      flex-direction: column;
+      margin-bottom: 1rem;
       text-align: left;
     }
-    .form-group label {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      color: #333;
-    }
-    .form-group input, .form-group select {
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-      outline: none;
-    }
-    .form-group input:focus, .form-group select:focus {
-      border-color: #ff6f00;
-    }
-    .btn-submit {
+
+    .input-field {
       width: 100%;
-      padding: 0.85rem;
-      background-color: #ff6f00;
-      color: white;
+      padding: 14px 16px;
+      border: 1px solid #D1C9B8;
+      border-radius: 10px;
+      background: #FFFFFF;
+      font-size: 0.95rem;
+      color: #1A1A1A;
+      outline: none;
+      box-sizing: border-box;
+      transition: border 0.2s;
+    }
+
+    .input-field:focus {
+      border-color: #1A1A1A;
+    }
+
+    .btn-dark {
+      width: 100%;
+      padding: 14px;
+      background-color: #1A1A1A;
+      color: #FFFFFF;
       border: none;
-      border-radius: 6px;
+      border-radius: 10px;
       font-size: 1rem;
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.3s;
+      margin-top: 0.5rem;
+      transition: opacity 0.2s;
     }
-    .btn-submit:hover {
-      background-color: #e66000;
+
+    .btn-dark:hover {
+      opacity: 0.9;
     }
-    .auth-form {
-      display: none;
-    }
-    .auth-form.active {
-      display: block;
-    }
-    /* Profile Section (लॉगिन झाल्यावर दिसेल) */
-    .profile-card {
-      display: none;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      max-width: 500px;
-      margin: 2rem auto;
-    }
-    .profile-card h2 { margin-bottom: 0.5rem; }
-    .role-badge {
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      background: #fff3e0;
-      color: #e65100;
-      border-radius: 20px;
-      font-weight: bold;
+
+    .divider {
+      margin: 1.5rem 0;
       font-size: 0.85rem;
-      margin-bottom: 1rem;
+      color: #777;
+      position: relative;
     }
-    .action-btns {
+
+    .checkbox-group {
       display: flex;
+      align-items: flex-start;
       gap: 10px;
-      justify-content: center;
+      text-align: left;
+      font-size: 0.85rem;
+      color: #444;
+      margin: 1.2rem 0;
+    }
+
+    .checkbox-group input {
+      margin-top: 3px;
+      accent-color: #1A1A1A;
+    }
+
+    .terms-text {
+      font-size: 0.8rem;
+      color: #666;
       margin-top: 1.5rem;
+      line-height: 1.4;
     }
-    .btn-secondary {
-      background: #eee;
-      color: #333;
-      padding: 0.75rem 1.25rem;
-      border-radius: 6px;
-      text-decoration: none;
+
+    .terms-text a, .switch-link {
+      color: #1A1A1A;
       font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
     }
-    .btn-primary {
-      background: #ff6f00;
-      color: #fff;
-      padding: 0.75rem 1.25rem;
-      border-radius: 6px;
-      text-decoration: none;
+
+    /* Logged In Dashboard Card */
+    .user-card {
+      display: none;
+      background: #FFFFFF;
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid #E5DEC9;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #FFF3E0;
+      color: #E65100;
+      border-radius: 20px;
+      font-size: 0.8rem;
       font-weight: 600;
+      margin-top: 0.5rem;
     }
   </style>
 </head>
 <body>
+
 <aside class="sidebar" id="sidebar">
   <a class="brand" href="index.html"><img src="assets/pixora-logo.png" alt="PIXORA logo"><span>PIXORA</span></a>
   <a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a>
@@ -145,7 +191,7 @@
   </nav>
   <div class="sidebar-bottom">
     <p class="sidebar-note">A home for Maharashtra's creativity.</p>
-    <a class="account-link" href="account.html">◉ &nbsp; Login / Sign up</a>
+    <a class="account-link" href="account.html">◉ &nbsp; Account</a>
   </div>
 </aside>
 
@@ -158,69 +204,61 @@
     <a class="profile-dot" href="account.html" aria-label="Account">P</a>
   </header>
 
-  <section class="page-hero">
-    <p class="eyebrow">YOUR PIXORA ACCOUNT</p>
-    <h1>Welcome to PIXORA</h1>
-    <p class="lead">लॉगिन करा किंवा तुमचे कंट्रिब्युटर अकाउंट तयार करून PSD, Vectors आणि Photos विकायला सुरुवात करा.</p>
-    
-    <!-- AUTH CONTAINER (Login / Signup Forms) -->
-    <div class="auth-container" id="authContainer">
-      <div class="auth-tabs">
-        <button class="auth-tab active" onclick="switchTab('login')">लॉगिन (Login)</button>
-        <button class="auth-tab" onclick="switchTab('signup')">साइन अप (Sign Up)</button>
+  <div class="auth-wrapper">
+    <!-- Account Form Area -->
+    <div id="authSection">
+      <h1 class="auth-title" id="formTitle">Create an account</h1>
+      <p class="auth-subtitle">Join PIXORA to download & sell creative assets</p>
+
+      <!-- Toggle Role: Buyer vs Contributor -->
+      <div class="role-toggle">
+        <button type="button" class="role-btn active" id="btnBuyer" onclick="setRole('Buyer')">Buyer / User</button>
+        <button type="button" class="role-btn" id="btnContributor" onclick="setRole('Contributor')">Contributor (Sell PSD/Vectors)</button>
       </div>
 
-      <!-- LOGIN FORM -->
-      <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
-        <div class="form-group">
-          <label for="loginEmail">ईमेल आयडी (Email)</label>
-          <input type="email" id="loginEmail" placeholder="yourname@example.com" required>
+      <form id="accountForm" onsubmit="handleSubmit(event)">
+        <div class="form-group" id="nameGroup">
+          <input type="text" id="fullName" class="input-field" placeholder="Enter your full name" required>
         </div>
+
         <div class="form-group">
-          <label for="loginPassword">पासवर्ड (Password)</label>
-          <input type="password" id="loginPassword" placeholder="••••••••" required>
+          <input type="email" id="userEmail" class="input-field" placeholder="Enter your email" required>
         </div>
-        <button type="submit" class="btn-submit">लॉगिन करा</button>
+
+        <div class="form-group">
+          <input type="password" id="userPassword" class="input-field" placeholder="Create a password" required>
+        </div>
+
+        <div class="checkbox-group" id="promoCheckbox">
+          <input type="checkbox" id="newsletter">
+          <label for="newsletter">I do not wish to receive news and promotions from PIXORA by email.</label>
+        </div>
+
+        <button type="submit" class="btn-dark" id="submitBtn">Continue</button>
       </form>
 
-      <!-- SIGNUP FORM -->
-      <form id="signupForm" class="auth-form" onsubmit="handleSignup(event)">
-        <div class="form-group">
-          <label for="fullName">पूर्ण नाव (Full Name)</label>
-          <input type="text" id="fullName" placeholder="उदा. राहुल पाटील" required>
-        </div>
-        <div class="form-group">
-          <label for="signupEmail">ईमेल आयडी (Email)</label>
-          <input type="email" id="signupEmail" placeholder="yourname@example.com" required>
-        </div>
-        <div class="form-group">
-          <label for="signupPassword">पासवर्ड (Password)</label>
-          <input type="password" id="signupPassword" placeholder="••••••••" required>
-        </div>
-        <div class="form-group">
-          <label for="userRole">तुम्हाला PIXORA कसे वापरायचे आहे?</label>
-          <select id="userRole" required>
-            <option value="Buyer">ग्राहकासाठी (Download Vector/PSD)</option>
-            <option value="Contributor">विक्रेत्यासाठी / Contributor (Sell Vector/PSD/Photos)</option>
-          </select>
-        </div>
-        <button type="submit" class="btn-submit">अकाउंट तयार करा</button>
-      </form>
+      <p class="terms-text">
+        By continuing, you agree to PIXORA's <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+      </p>
+
+      <p class="terms-text" style="margin-top: 1.5rem;">
+        <span id="switchText">Already have an account?</span> 
+        <span class="switch-link" id="switchAction" onclick="toggleMode()">Log in</span>
+      </p>
     </div>
 
-    <!-- PROFILE DASHBOARD CARD (लॉगिन झाल्यावर दिसेल) -->
-    <div class="profile-card" id="profileCard">
-      <h2 id="userName">नमस्ते, युजर!</h2>
-      <p id="userEmailText" style="color: #666; margin-bottom: 0.5rem;"></p>
-      <span class="role-badge" id="userRoleBadge">Contributor</span>
-      <p>तुमचे अकाउंट यशस्वीरित्या सुरु झाले आहे.</p>
-      
-      <div class="action-btns">
-        <a href="creator.html" id="sellBtn" class="btn-primary">PSD/Vectors अपलोड करा ➔</a>
-        <button onclick="handleLogout()" class="btn-secondary">लॉगआउट</button>
+    <!-- Dashboard/Profile Card (After Login/Signup) -->
+    <div class="user-card" id="userDashboard">
+      <h2 id="dispName" style="margin-bottom: 5px;">Welcome!</h2>
+      <p id="dispEmail" style="color: #666; font-size: 0.9rem;"></p>
+      <span class="badge" id="dispRole">Contributor</span>
+
+      <div style="margin-top: 2rem;">
+        <a href="creator.html" id="actionBtn" class="btn-dark" style="display: block; text-decoration: none;">Upload Vector / PSD Files ➔</a>
+        <button onclick="logout()" class="btn-dark" style="background: transparent; color: #1A1A1A; border: 1px solid #1A1A1A; margin-top: 10px;">Log out</button>
       </div>
     </div>
-  </section>
+  </div>
 
   <footer class="footer">
     <a class="footer-brand" href="index.html">PIXORA</a>
@@ -232,83 +270,48 @@
 
 <script src="script.js"></script>
 <script>
-  // Tabs Switch Functionality
-  function switchTab(tab) {
-    const loginForm = document.getElementById('loginForm');
-    const signupForm = document.getElementById('signupForm');
-    const tabs = document.querySelectorAll('.auth-tab');
+  let isSignUp = true;
+  let selectedRole = 'Buyer';
 
-    if (tab === 'login') {
-      loginForm.classList.add('active');
-      signupForm.classList.remove('active');
-      tabs[0].classList.add('active');
-      tabs[1].classList.remove('active');
-    } else {
-      signupForm.classList.add('active');
-      loginForm.classList.remove('active');
-      tabs[1].classList.add('active');
-      tabs[0].classList.remove('active');
-    }
+  function setRole(role) {
+    selectedRole = role;
+    document.getElementById('btnBuyer').classList.toggle('active', role === 'Buyer');
+    document.getElementById('btnContributor').classList.toggle('active', role === 'Contributor');
   }
 
-  // Handle Signup
-  function handleSignup(event) {
-    event.preventDefault();
-    const name = document.getElementById('fullName').value;
-    const email = document.getElementById('signupEmail').value;
-    const role = document.getElementById('userRole').value;
-
-    const userData = { name, email, role, isLoggedIn: true };
-    localStorage.setItem('pixora_user', JSON.stringify(userData));
-    checkAuthStatus();
+  function toggleMode() {
+    isSignUp = !isSignUp;
+    document.getElementById('formTitle').innerText = isSignUp ? "Create an account" : "Welcome back";
+    document.getElementById('nameGroup').style.display = isSignUp ? "block" : "none";
+    document.getElementById('promoCheckbox').style.display = isSignUp ? "flex" : "none";
+    document.getElementById('submitBtn').innerText = isSignUp ? "Continue" : "Log In";
+    document.getElementById('switchText').innerText = isSignUp ? "Already have an account?" : "Don't have an account?";
+    document.getElementById('switchAction').innerText = isSignUp ? "Log in" : "Sign up";
+    
+    document.getElementById('fullName').required = isSignUp;
   }
 
-  // Handle Login
-  function handleLogin(event) {
-    event.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    // डेमोसाठी मुलभूत डेटा
-    const userData = { name: "Creative Member", email: email, role: "Contributor", isLoggedIn: true };
-    localStorage.setItem('pixora_user', JSON.stringify(userData));
-    checkAuthStatus();
+  function handleSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById('userEmail').value;
+    const name = isSignUp ? document.getElementById('fullName').value : email.split('@')[0];
+
+    const userData = {
+      name: name,
+      email: email,
+      role: selectedRole,
+      isLoggedIn: true
+    };
+
+    localStorage.setItem('pixora_active_user', JSON.stringify(userData));
+    checkAuth();
   }
 
-  // Handle Logout
-  function handleLogout() {
-    localStorage.removeItem('pixora_user');
-    checkAuthStatus();
+  function logout() {
+    localStorage.removeItem('pixora_active_user');
+    checkAuth();
   }
 
-  // Check user login status on page load
-  function checkAuthStatus() {
-    const authContainer = document.getElementById('authContainer');
-    const profileCard = document.getElementById('profileCard');
-    const savedUser = localStorage.getItem('pixora_user');
-
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      authContainer.style.display = 'none';
-      profileCard.style.display = 'block';
-
-      document.getElementById('userName').innerText = "नमस्ते, " + user.name + "!";
-      document.getElementById('userEmailText').innerText = user.email;
-      document.getElementById('userRoleBadge').innerText = "अकाउंट टाईप: " + user.role;
-
-      if(user.role === 'Buyer') {
-        document.getElementById('sellBtn').innerText = "डिजाईन्स एक्सप्लोर करा ➔";
-        document.getElementById('sellBtn').href = "explore.html";
-      } else {
-        document.getElementById('sellBtn').innerText = "PSD/Vectors अपलोड करा ➔";
-        document.getElementById('sellBtn').href = "creator.html";
-      }
-    } else {
-      authContainer.style.display = 'block';
-      profileCard.style.display = 'none';
-    }
-  }
-
-  // Run on page load
-  window.onload = checkAuthStatus;
-</script>
-</body>
-</html>
+  function checkAuth() {
+    const user =
+  
