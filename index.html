@@ -4,19 +4,6 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#FFF8E1"><meta name="description" content="PIXORA — Maharashtra-inspired creative design marketplace">
 <title>Home | PIXORA</title><link rel="icon" href="assets/pixora-logo.png"><link rel="stylesheet" href="styles.css">
-<style>
-/* Keep the avatar circular but remove the visible outline/border. */
-.profile-dot, #profileMenuButton {
-  border:  0 !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-.profile-dot:focus, #profileMenuButton:focus,
-.profile-dot:focus-visible, #profileMenuButton:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-}
-</style>
 
 <style>
 /* Mobile header: show the PIXORA logo instead of the wordmark, including when the menu opens. */
@@ -62,13 +49,7 @@
 <header class="topbar">
 <button class="menu-button" id="menuButton" aria-label="Open menu">☰</button><a class="mobile-brand" href="index.html" aria-label="PIXORA home"><img src="assets/pixora-logo.png" alt="PIXORA"></a><div class="topbar-spacer"></div>
 <a class="top-link" href="plans.html">PLANS</a>
-<div class="profile-menu-wrap">
-<button class="profile-dot" id="profileMenuButton" aria-label="Open account menu" aria-expanded="false">P</button>
-<div class="profile-menu" id="profileMenu" hidden>
-<div class="profile-menu-user"><strong id="menuUserName">PIXORA account</strong><small id="menuUserEmail">Sign in to personalize PIXORA</small></div>
-<a href="plans.html">Get a Plan</a><a href="settings.html">Settings</a><a href="collections.html">My Collections</a>
-<a href="account.html" id="menuLoginLink">Log in / Sign up</a><button type="button" id="menuLogoutButton" hidden>Log out</button>
-</div></div></header>
+</header>
 <section class="hero"><p class="eyebrow">MADE FOR LOCAL CREATORS</p><h1>Good ideas deserve<br><span>a beautiful design.</span></h1><p class="lead">Discover Marathi designs, festival creatives, banners, backgrounds and editable resources — all in one place.</p>
 <form class="search" action="search.html"><input name="q" placeholder="Search banners, PSDs, festivals, vectors..." aria-label="Search designs"><button>Search</button></form>
 <div class="quick-links"><a href="images.html">▧<span>Images</span></a><a href="vectors.html">✳<span>Vectors</span></a><a href="psd.html">PSD<span>PSD Files</span></a><a href="templates.html">▦<span>Templates</span></a></div></section>
