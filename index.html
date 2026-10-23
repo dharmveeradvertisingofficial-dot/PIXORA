@@ -10,12 +10,19 @@
 <link rel="stylesheet" href="styles.css">
 
 <style>
-/* Remove outline and border from profile icon completely */
+/* Make profile icon perfectly round, remove border/outline */
 .profile-dot, #profileMenuButton {
   border: 0 !important;
   outline: none !important;
   box-shadow: none !important;
-  background: transparent;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  padding: 0 !important;
 }
 .profile-dot:focus, #profileMenuButton:focus,
 .profile-dot:focus-visible, #profileMenuButton:focus-visible {
@@ -23,16 +30,16 @@
   box-shadow: none !important;
 }
 
-/* Single clean logo in mobile header */
+/* Make website logo bigger and clean in mobile header */
 .topbar-logo {
   display: inline-flex;
   align-items: center;
-  margin-left: 8px;
+  margin-left: 10px;
 }
 .topbar-logo img {
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
   object-fit: contain;
 }
 
@@ -86,7 +93,7 @@
 <main class="main">
 <header class="topbar">
 <button class="menu-button" id="menuButton" aria-label="Open menu">☰</button>
-<!-- फक्त एकच लोगो इथे ठेवला आहे -->
+<!-- मोठा केलेला वेबसाईटचा लोगो -->
 <a class="topbar-logo" href="index.html" aria-label="PIXORA home"><img src="assets/pixora-logo.png" alt="PIXORA"></a>
 <div class="topbar-spacer"></div>
 <a class="top-link" href="plans.html">PLANS</a>
