@@ -133,3 +133,19 @@ if(form){
    finally{if(submit){submit.disabled=!currentUser;submit.textContent='Upload design';}}
  });
 })();
+/* PIXORA mobile search improvement */
+(function () {
+  const form = document.getElementById("homeSearchForm");
+  const input = document.getElementById("homeSearchInput");
+
+  if (!form || !input) return;
+
+  input.addEventListener("focus", function () {
+    setTimeout(function () {
+      input.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }, 300);
+  });
+})();
