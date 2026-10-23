@@ -4,314 +4,122 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#FFF8E1">
-  <meta name="description" content="PIXORA — Maharashtra-inspired creative design marketplace">
-  <title>Account | PIXORA</title>
-  <link rel="icon" href="assets/pixora-logo.png">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Create your PIXORA account">
+  <title>Create an account | PIXORA</title>
   <style>
-    /* Light Theme Styling (PIXORA Cream Theme) */
+    :root {
+      --cream: #FFF8E1;
+      --cream-deep: #EFE8D5;
+      --ink: #25241F;
+      --gold: #A88C4C;
+      --muted: #777166;
+      --line: #E5DCC5;
+      --white: #FFFEFA;
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
     body {
-      background-color: #FFF8E1 !important; /* Screenshot 2 background color */
-      color: #1A1A1A;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      display: grid;
+      place-items: center;
+      padding: 28px 16px;
     }
-
-    .auth-wrapper {
-      max-width: 420px;
-      margin: 2rem auto;
-      padding: 2.5rem 1.5rem;
-      text-align: center;
+    .auth { width: min(100%, 390px); text-align: center; }
+    .brand {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      margin: 0 auto 28px; color: var(--ink); text-decoration: none;
+      font-size: 24px; font-weight: 850; letter-spacing: -1px;
     }
-
-    .brand-logo {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 1.5rem;
-      color: #1A1A1A;
-      display: inline-block;
-      text-decoration: none;
+    .brand img { width: 38px; height: 38px; object-fit: contain; }
+    .brand-mark {
+      display: none; width: 38px; height: 38px; border-radius: 9px;
+      background: var(--ink); color: var(--cream); align-items: center; justify-content: center;
+      font-weight: 900; font-size: 24px;
     }
-
-    .auth-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: #1A1A1A;
-    }
-
-    .auth-subtitle {
-      font-size: 0.95rem;
-      color: #666;
-      margin-bottom: 2rem;
-    }
-
-    /* Role Toggle Buttons */
-    .role-toggle {
-      display: flex;
-      background: #EFE8D5;
-      padding: 4px;
-      border-radius: 10px;
-      margin-bottom: 1.5rem;
-    }
-
-    .role-btn {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      background: transparent;
-      font-weight: 600;
-      font-size: 0.85rem;
-      border-radius: 8px;
-      cursor: pointer;
-      color: #555;
-      transition: all 0.2s ease;
-    }
-
-    .role-btn.active {
-      background: #FFFFFF;
-      color: #1A1A1A;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    /* Input & Button Styling (Screenshot 1 Layout) */
-    .form-group {
-      margin-bottom: 1rem;
-      text-align: left;
-    }
-
-    .input-field {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1px solid #D1C9B8;
-      border-radius: 10px;
-      background: #FFFFFF;
-      font-size: 0.95rem;
-      color: #1A1A1A;
-      outline: none;
-      box-sizing: border-box;
-      transition: border 0.2s;
-    }
-
-    .input-field:focus {
-      border-color: #1A1A1A;
-    }
-
-    .btn-dark {
-      width: 100%;
-      padding: 14px;
-      background-color: #1A1A1A;
-      color: #FFFFFF;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 0.5rem;
-      transition: opacity 0.2s;
-    }
-
-    .btn-dark:hover {
-      opacity: 0.9;
-    }
-
-    .divider {
-      margin: 1.5rem 0;
-      font-size: 0.85rem;
-      color: #777;
-      position: relative;
-    }
-
-    .checkbox-group {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      text-align: left;
-      font-size: 0.85rem;
-      color: #444;
-      margin: 1.2rem 0;
-    }
-
-    .checkbox-group input {
-      margin-top: 3px;
-      accent-color: #1A1A1A;
-    }
-
-    .terms-text {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 1.5rem;
-      line-height: 1.4;
-    }
-
-    .terms-text a, .switch-link {
-      color: #1A1A1A;
-      font-weight: 600;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    /* Logged In Dashboard Card */
-    .user-card {
-      display: none;
-      background: #FFFFFF;
-      padding: 2rem;
-      border-radius: 16px;
-      border: 1px solid #E5DEC9;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 4px 12px;
-      background: #FFF3E0;
-      color: #E65100;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-top: 0.5rem;
-    }
+    h1 { font-size: clamp(27px, 6vw, 31px); line-height: 1.15; letter-spacing: -1.1px; margin: 0 0 10px; font-weight: 800; }
+    .subtitle { margin: 0 0 27px; color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .social { display: flex; align-items: center; width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 9px; margin: 0 0 10px; background: var(--white); color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 650; overflow: hidden; }
+    .social .provider { width: 48px; align-self: stretch; display: grid; place-items: center; background: #fff; border-left: 1px solid var(--line); font-size: 20px; }
+    .social .social-label { flex: 1; text-align: left; padding: 0 14px; }
+    .apple { justify-content: center; background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .apple .social-label { flex: initial; text-align: center; padding: 0 8px; }
+    .divider { display: flex; align-items: center; gap: 12px; margin: 25px 0; color: var(--muted); font-size: 12px; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .field { display: block; width: 100%; height: 48px; margin: 0 0 12px; padding: 0 14px; border: 1px solid #D7CEB9; border-radius: 9px; background: var(--white); color: var(--ink); font: inherit; font-size: 14px; outline: none; }
+    .field::placeholder { color: #8A8376; }
+    .field:focus { border-color: var(--gold); box-shadow: 0 0 0 3px #A88C4C22; }
+    .continue { width: 100%; min-height: 48px; border: 0; border-radius: 9px; background: var(--ink); color: var(--cream); font: inherit; font-size: 14px; font-weight: 750; cursor: pointer; margin-top: 1px; }
+    .continue:hover { background: #39372F; }
+    .newsletter { display: flex; align-items: flex-start; gap: 10px; text-align: left; margin: 20px 0 22px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .newsletter input { margin: 3px 0 0; accent-color: var(--ink); }
+    .terms { margin: 0 auto 24px; max-width: 330px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .terms a, .switch a { color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+    .switch { margin: 0; font-size: 12px; color: var(--muted); }
+    .switch a { text-decoration: none; }
+    .notice { display: none; margin: 12px 0 0; color: #7B622E; font-size: 12px; }
+    @media (max-width: 420px) { body { padding: 22px 20px; } .brand { margin-bottom: 24px; } }
   </style>
 </head>
 <body>
+  <main class="auth">
+    <a class="brand" href="index.html" aria-label="PIXORA home">
+      <img src="assets/pixora-logo.png" alt="PIXORA logo" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span>PIXORA</span>
+    </a>
+    <h1 id="title">Create an account</h1>
+    <p class="subtitle" id="subtitle">Join PIXORA to discover and download creative designs.</p>
 
-<aside class="sidebar" id="sidebar">
-  <a class="brand" href="index.html"><img src="assets/pixora-logo.png" alt="PIXORA logo"><span>PIXORA</span></a>
-  <a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a>
-  <nav class="main-nav" aria-label="Main navigation">
-    <a class="nav-link" href="index.html"><span class="nav-icon">⌂</span><span>Home</span></a>
-    <a class="nav-link" href="search.html"><span class="nav-icon">⌕</span><span>Search</span></a>
-    <a class="nav-link" href="stock.html"><span class="nav-icon">▧</span><span>Stock</span></a>
-    <a class="nav-link" href="explore.html"><span class="nav-icon">✧</span><span>Explore</span></a>
-    <a class="nav-link" href="projects.html"><span class="nav-icon">▱</span><span>Projects</span></a>
-    <a class="nav-link" href="library.html"><span class="nav-icon">▤</span><span>Library</span></a>
-    <a class="nav-link" href="plans.html"><span class="nav-icon">♢</span><span>Plans</span></a>
-    <a class="nav-link" href="creator.html"><span class="nav-icon">✎</span><span>Become a Creator</span></a>
-    <a class="nav-link" href="admin.html"><span class="nav-icon">⚙</span><span>Admin Panel</span></a>
-  </nav>
-  <div class="sidebar-bottom">
-    <p class="sidebar-note">A home for Maharashtra's creativity.</p>
-    <a class="account-link" href="account.html">◉ &nbsp; Account</a>
-  </div>
-</aside>
+    <a class="social" href="#" id="googleButton" aria-label="Continue with Google" onclick="demoNotice(event)">
+      <span class="social-label">Continue with Google</span><span class="provider" aria-hidden="true">🌐</span>
+    </a>
+    <a class="social apple" href="#" id="appleButton" onclick="demoNotice(event)">
+      <span class="social-label">Continue with Apple</span>
+    </a>
 
-<main class="main">
-  <header class="topbar">
-    <button class="menu-button" id="menuButton" aria-label="Open menu">☰</button>
-    <a class="mobile-brand" href="index.html">PIXORA</a>
-    <div class="topbar-spacer"></div>
-    <a class="top-link" href="plans.html">PLANS</a>
-    <a class="profile-dot" href="account.html" aria-label="Account">P</a>
-  </header>
-
-  <div class="auth-wrapper">
-    <!-- Account Form Area -->
-    <div id="authSection">
-      <h1 class="auth-title" id="formTitle">Create an account</h1>
-      <p class="auth-subtitle">Join PIXORA to download & sell creative assets</p>
-
-      <!-- Toggle Role: Buyer vs Contributor -->
-      <div class="role-toggle">
-        <button type="button" class="role-btn active" id="btnBuyer" onclick="setRole('Buyer')">Buyer / User</button>
-        <button type="button" class="role-btn" id="btnContributor" onclick="setRole('Contributor')">Contributor (Sell PSD/Vectors)</button>
-      </div>
-
-      <form id="accountForm" onsubmit="handleSubmit(event)">
-        <div class="form-group" id="nameGroup">
-          <input type="text" id="fullName" class="input-field" placeholder="Enter your full name" required>
-        </div>
-
-        <div class="form-group">
-          <input type="email" id="userEmail" class="input-field" placeholder="Enter your email" required>
-        </div>
-
-        <div class="form-group">
-          <input type="password" id="userPassword" class="input-field" placeholder="Create a password" required>
-        </div>
-
-        <div class="checkbox-group" id="promoCheckbox">
-          <input type="checkbox" id="newsletter">
-          <label for="newsletter">I do not wish to receive news and promotions from PIXORA by email.</label>
-        </div>
-
-        <button type="submit" class="btn-dark" id="submitBtn">Continue</button>
-      </form>
-
-      <p class="terms-text">
-        By continuing, you agree to PIXORA's <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
-      </p>
-
-      <p class="terms-text" style="margin-top: 1.5rem;">
-        <span id="switchText">Already have an account?</span> 
-        <span class="switch-link" id="switchAction" onclick="toggleMode()">Log in</span>
-      </p>
-    </div>
-
-    <!-- Dashboard/Profile Card (After Login/Signup) -->
-    <div class="user-card" id="userDashboard">
-      <h2 id="dispName" style="margin-bottom: 5px;">Welcome!</h2>
-      <p id="dispEmail" style="color: #666; font-size: 0.9rem;"></p>
-      <span class="badge" id="dispRole">Contributor</span>
-
-      <div style="margin-top: 2rem;">
-        <a href="creator.html" id="actionBtn" class="btn-dark" style="display: block; text-decoration: none;">Upload Vector / PSD Files ➔</a>
-        <button onclick="logout()" class="btn-dark" style="background: transparent; color: #1A1A1A; border: 1px solid #1A1A1A; margin-top: 10px;">Log out</button>
-      </div>
-    </div>
-  </div>
-
-  <footer class="footer">
-    <a class="footer-brand" href="index.html">PIXORA</a>
-    <span>Designed for Maharashtra's creative community.</span>
-    <a href="contact.html">Contact</a>
-    <span>© 2026 PIXORA</span>
-  </footer>
-</main>
-
-<script src="script.js"></script>
-<script>
-  let isSignUp = true;
-  let selectedRole = 'Buyer';
-
-  function setRole(role) {
-    selectedRole = role;
-    document.getElementById('btnBuyer').classList.toggle('active', role === 'Buyer');
-    document.getElementById('btnContributor').classList.toggle('active', role === 'Contributor');
-  }
-
-  function toggleMode() {
-    isSignUp = !isSignUp;
-    document.getElementById('formTitle').innerText = isSignUp ? "Create an account" : "Welcome back";
-    document.getElementById('nameGroup').style.display = isSignUp ? "block" : "none";
-    document.getElementById('promoCheckbox').style.display = isSignUp ? "flex" : "none";
-    document.getElementById('submitBtn').innerText = isSignUp ? "Continue" : "Log In";
-    document.getElementById('switchText').innerText = isSignUp ? "Already have an account?" : "Don't have an account?";
-    document.getElementById('switchAction').innerText = isSignUp ? "Log in" : "Sign up";
-    
-    document.getElementById('fullName').required = isSignUp;
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    const email = document.getElementById('userEmail').value;
-    const name = isSignUp ? document.getElementById('fullName').value : email.split('@')[0];
-
-    const userData = {
-      name: name,
-      email: email,
-      role: selectedRole,
-      isLoggedIn: true
-    };
-
-    localStorage.setItem('pixora_active_user', JSON.stringify(userData));
-    checkAuth();
-  }
-
-  function logout() {
-    localStorage.removeItem('pixora_active_user');
-    checkAuth();
-  }
-
-  function checkAuth() {
-    const user =
-  
+    <div class="divider"><span>Or continue with email</span></div>
+    <form id="accountForm">
+      <input class="field" id="name" type="text" placeholder="Enter your name" autocomplete="name" required>
+      <input class="field" id="email" type="email" placeholder="Enter your email" autocomplete="email" required>
+      <input class="field" id="password" type="password" placeholder="Create a password" autocomplete="new-password" minlength="8" required>
+      <button class="continue" id="submitButton" type="submit">Continue</button>
+    </form>
+    <label class="newsletter" id="newsletterRow"><input type="checkbox" id="newsletter"><span>I do not wish to receive news and promotions from PIXORA by email.</span></label>
+    <p class="terms">By continuing, you agree to PIXORA's <a href="terms.html">Terms of Use</a> and <a href="privacy.html">Privacy Policy</a>.</p>
+    <p class="switch"><span id="switchPrompt">Already have an account?</span> <a href="#" id="switchLink">Log in</a></p>
+    <p class="notice" id="notice" role="status">This is the page design only. Connect an authentication provider to enable real sign-in.</p>
+  </main>
+  <script>
+    let signUp = true;
+    const title = document.getElementById('title');
+    const subtitle = document.getElementById('subtitle');
+    const nameField = document.getElementById('name');
+    const passwordField = document.getElementById('password');
+    const submitButton = document.getElementById('submitButton');
+    const newsletterRow = document.getElementById('newsletterRow');
+    const switchPrompt = document.getElementById('switchPrompt');
+    const switchLink = document.getElementById('switchLink');
+    const form = document.getElementById('accountForm');
+    function updateMode() {
+      title.textContent = signUp ? 'Create an account' : 'Welcome back';
+      subtitle.textContent = signUp ? 'Join PIXORA to discover and download creative designs.' : 'Log in to continue to your PIXORA account.';
+      nameField.hidden = !signUp;
+      nameField.required = signUp;
+      nameField.autocomplete = signUp ? 'name' : 'off';
+      passwordField.autocomplete = signUp ? 'new-password' : 'current-password';
+      passwordField.placeholder = signUp ? 'Create a password' : 'Enter your password';
+      submitButton.textContent = signUp ? 'Continue' : 'Log in';
+      newsletterRow.hidden = !signUp;
+      switchPrompt.textContent = signUp ? 'Already have an account?' : "Don't have an account?";
+      switchLink.textContent = signUp ? 'Log in' : 'Sign up';
+    }
+    switchLink.addEventListener('click', function(e) { e.preventDefault(); signUp = !signUp; updateMode(); });
+    form.addEventListener('submit', function(e) { e.preventDefault(); document.getElementById('notice').style.display = 'block'; });
+    function demoNotice(e) { e.preventDefault(); document.getElementById('notice').style.display = 'block'; }
+    updateMode();
+  </script>
+</body>
+</html>
