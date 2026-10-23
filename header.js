@@ -18,32 +18,36 @@ document.addEventListener("DOMContentLoaded", function() {
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
     `;
 
-    // जिथे हेडर हवा तिथे हा कोड इन्सर्ट होईल
+    // हेडर मुख्य पानावर इन्सर्ट करणे
     const mainElement = document.querySelector('main.main');
     if (mainElement) {
         mainElement.insertAdjacentHTML('afterbegin', topbarHTML);
     }
 
-    // २. Sidebar आणि Menu toggle चे फंक्शन्स
+    // २. Sidebar आणि Menu toggle (तीन रेषांचे बटन)
     const menuBtn = document.getElementById('menuButton');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
 
-    if (menuBtn && sidebar && overlay) {
-        menuBtn.addEventListener('click', () => {
+    if (menuBtn && sidebar) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
+            if (overlay) overlay.classList.toggle('active');
         });
+    }
 
+    if (overlay && sidebar) {
         overlay.addEventListener('click', () => {
             sidebar.classList.remove('active');
             overlay.classList.remove('active');
         });
     }
 
-    // ३. Profile menu toggle
+    // ३. Profile Menu Toggle (जीमेल/प्रोफाइल आयकॉन)
     const profileBtn = document.getElementById('profileMenuButton');
     const profileMenu = document.getElementById('profileMenu');
+    
     if (profileBtn && profileMenu) {
         profileBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -57,9 +61,12 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        document.addEventListener('click', () => {
-            profileMenu.setAttribute('hidden', '');
-            profileBtn.setAttribute('aria-expanded', 'false');
+        // बाहेर कुठेही क्लिक केल्यास प्रोफाईल मेनू बंद होणे
+        document.addEventListener('click', (e) => {
+            if (!profileMenu.contains(e.target) && !profileBtn.contains(e.target)) {
+                profileMenu.setAttribute('hidden', '');
+                profileBtn.setAttribute('aria-expanded', 'false');
+            }
         });
     }
 });
