@@ -125,10 +125,19 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
       document.getElementById('appleButton').hidden = reset;
     }
     function showAccount(user) {
+      // Keep the account details available briefly, then return to PIXORA home.
+      // The one-time flag prevents redirect loops when the page is revisited.
       authSection.hidden = true;
       accountPanel.style.display = 'block';
       document.getElementById('accountName').textContent = 'Name: ' + (user.user_metadata?.full_name || user.user_metadata?.name || 'PIXORA user');
       document.getElementById('accountEmail').textContent = 'Email: ' + (user.email || '');
+      const params = new URLSearchParams(window.location.search);
+      const cameFromAuth = params.has('code') || params.has('access_token') ||
+        sessionStorage.getItem('pixora_auth_redirect') === '1';
+      if (cameFromAuth) {
+        sessionStorage.removeItem('pixora_auth_redirect');
+        window.location.replace('index.html');
+      }
     }
     function showAuth() {
       authSection.hidden = false;
@@ -161,6 +170,7 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
           });
           if (error) throw error;
           if (data.session && data.user) {
+            sessionStorage.setItem('pixora_auth_redirect', '1');
             showAccount(data.user);
             message('Your PIXORA account was created successfully.', 'success');
           } else {
@@ -170,6 +180,7 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
         } else if (mode === 'login') {
           const { data, error } = await supabase.auth.signInWithPassword({ email, password: passwordField.value });
           if (error) throw error;
+          sessionStorage.setItem('pixora_auth_redirect', '1');
           showAccount(data.user);
           message('You are now logged in securely.', 'success');
         } else {
@@ -187,6 +198,7 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
 
     async function oauth(provider) {
       clearMessage();
+      sessionStorage.setItem('pixora_auth_redirect', '1');
       if (!isConfigured || !supabase) {
         message('Authentication is not connected yet. Add your Supabase settings and enable this provider in Supabase Auth.', 'error');
         return;
