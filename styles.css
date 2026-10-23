@@ -29,35 +29,3 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   margin: 0 !important;
 }
-/* हा कोड फक्त मोबाईल फोनवर (७६८ पिक्सेल किंवा त्यापेक्षा कमी स्क्रीन) लागू होईल */
-@media (max-width: 768px) {
-  
-  /* १. प्रोफाईल आयकॉन पूर्ण गोल आणि बॉर्डर नसलेला करण्यासाठी */
-  .profile-dot, #profileMenuButton {
-    border: 0 !important;
-    outline: none !important;
-    box-shadow: none !important;
-    width: 38px !important;
-    height: 38px !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    background: transparent !important;
-  }
-  
-  .profile-dot:focus, #profileMenuButton:focus,
-  .profile-dot:focus-visible, #profileMenuButton:focus-visible {
-    outline: none !important;
-    box-shadow: none !important;
-  }
-
-  /* २. मोबाईल हेडरमधील लोगो मोठा आणि व्यवस्थित दिसण्यासाठी */
-  .topbar-logo img, .mobile-brand img, header .topbar img {
-    width: 38px !important;
-    height: 38px !important;
-    object-fit: contain !important;
-  }
-}
