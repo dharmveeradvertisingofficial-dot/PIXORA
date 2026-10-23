@@ -1,17 +1,314 @@
 <!doctype html>
-<html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#FFF8E1"><meta name="description" content="PIXORA — Maharashtra-inspired creative design marketplace"><title>Account | PIXORA</title><link rel="icon" href="assets/pixora-logo.png"><link rel="stylesheet" href="styles.css"></head>
+<html lang="mr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFF8E1">
+  <meta name="description" content="PIXORA — Maharashtra-inspired creative design marketplace">
+  <title>Account | PIXORA</title>
+  <link rel="icon" href="assets/pixora-logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Account Page साठी लागणारे सोपे आणि आकर्षक CSS */
+    .auth-container {
+      max-width: 480px;
+      margin: 2rem auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e0e0e0;
+    }
+    .auth-tabs {
+      display: flex;
+      border-bottom: 2px solid #eee;
+      margin-bottom: 1.5rem;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 0.75rem;
+      text-align: center;
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #666;
+    }
+    .auth-tab.active {
+      color: #ff6f00;
+      border-bottom: 3px solid #ff6f00;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #333;
+    }
+    .form-group input, .form-group select {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus {
+      border-color: #ff6f00;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 0.85rem;
+      background-color: #ff6f00;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn-submit:hover {
+      background-color: #e66000;
+    }
+    .auth-form {
+      display: none;
+    }
+    .auth-form.active {
+      display: block;
+    }
+    /* Profile Section (लॉगिन झाल्यावर दिसेल) */
+    .profile-card {
+      display: none;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      max-width: 500px;
+      margin: 2rem auto;
+    }
+    .profile-card h2 { margin-bottom: 0.5rem; }
+    .role-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: #fff3e0;
+      color: #e65100;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+    .action-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .btn-secondary {
+      background: #eee;
+      color: #333;
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background: #ff6f00;
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
 <body>
-<aside class="sidebar" id="sidebar"><a class="brand" href="index.html"><img src="assets/pixora-logo.png" alt="PIXORA logo"><span>PIXORA</span></a><a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a><nav class="main-nav" aria-label="Main navigation"><a class="nav-link " href="index.html"><span class="nav-icon">⌂</span><span>Home</span></a>
-<a class="nav-link " href="search.html"><span class="nav-icon">⌕</span><span>Search</span></a>
-<a class="nav-link " href="stock.html"><span class="nav-icon">▧</span><span>Stock</span></a>
-<a class="nav-link " href="explore.html"><span class="nav-icon">✧</span><span>Explore</span></a>
-<a class="nav-link " href="projects.html"><span class="nav-icon">▱</span><span>Projects</span></a>
-<a class="nav-link " href="library.html"><span class="nav-icon">▤</span><span>Library</span></a>
-<a class="nav-link " href="plans.html"><span class="nav-icon">♢</span><span>Plans</span></a>
-<a class="nav-link " href="creator.html"><span class="nav-icon">✎</span><span>Become a Creator</span></a>
-<a class="nav-link " href="admin.html"><span class="nav-icon">⚙</span><span>Admin Panel</span></a></nav><div class="sidebar-bottom"><p class="sidebar-note">A home for Maharashtra's creativity.</p><a class="account-link" href="account.html">◉ &nbsp; Login / Sign up</a></div></aside>
-<main class="main"><header class="topbar"><button class="menu-button" id="menuButton" aria-label="Open menu">☰</button><a class="mobile-brand" href="index.html">PIXORA</a><div class="topbar-spacer"></div><a class="top-link" href="plans.html">PLANS</a><a class="profile-dot" href="account.html" aria-label="Account">P</a></header>
-<section class="page-hero"><p class="eyebrow">YOUR PIXORA ACCOUNT</p><h1>Login & sign up</h1><p class="lead">Account creation will be connected using a secure authentication service in the next step.</p><div class="resource-box"><h2>Account setup is next</h2><p>This demo page does not collect passwords or personal information.</p></div></section>
-<footer class="footer"><a class="footer-brand" href="index.html">PIXORA</a><span>Designed for Maharashtra's creative community.</span><a href="contact.html">Contact</a><span>© 2026 PIXORA</span></footer></main>
-<script src="script.js"></script></body></html>
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="index.html"><img src="assets/pixora-logo.png" alt="PIXORA logo"><span>PIXORA</span></a>
+  <a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a>
+  <nav class="main-nav" aria-label="Main navigation">
+    <a class="nav-link" href="index.html"><span class="nav-icon">⌂</span><span>Home</span></a>
+    <a class="nav-link" href="search.html"><span class="nav-icon">⌕</span><span>Search</span></a>
+    <a class="nav-link" href="stock.html"><span class="nav-icon">▧</span><span>Stock</span></a>
+    <a class="nav-link" href="explore.html"><span class="nav-icon">✧</span><span>Explore</span></a>
+    <a class="nav-link" href="projects.html"><span class="nav-icon">▱</span><span>Projects</span></a>
+    <a class="nav-link" href="library.html"><span class="nav-icon">▤</span><span>Library</span></a>
+    <a class="nav-link" href="plans.html"><span class="nav-icon">♢</span><span>Plans</span></a>
+    <a class="nav-link" href="creator.html"><span class="nav-icon">✎</span><span>Become a Creator</span></a>
+    <a class="nav-link" href="admin.html"><span class="nav-icon">⚙</span><span>Admin Panel</span></a>
+  </nav>
+  <div class="sidebar-bottom">
+    <p class="sidebar-note">A home for Maharashtra's creativity.</p>
+    <a class="account-link" href="account.html">◉ &nbsp; Login / Sign up</a>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <button class="menu-button" id="menuButton" aria-label="Open menu">☰</button>
+    <a class="mobile-brand" href="index.html">PIXORA</a>
+    <div class="topbar-spacer"></div>
+    <a class="top-link" href="plans.html">PLANS</a>
+    <a class="profile-dot" href="account.html" aria-label="Account">P</a>
+  </header>
+
+  <section class="page-hero">
+    <p class="eyebrow">YOUR PIXORA ACCOUNT</p>
+    <h1>Welcome to PIXORA</h1>
+    <p class="lead">लॉगिन करा किंवा तुमचे कंट्रिब्युटर अकाउंट तयार करून PSD, Vectors आणि Photos विकायला सुरुवात करा.</p>
+    
+    <!-- AUTH CONTAINER (Login / Signup Forms) -->
+    <div class="auth-container" id="authContainer">
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchTab('login')">लॉगिन (Login)</button>
+        <button class="auth-tab" onclick="switchTab('signup')">साइन अप (Sign Up)</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginEmail">ईमेल आयडी (Email)</label>
+          <input type="email" id="loginEmail" placeholder="yourname@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">पासवर्ड (Password)</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-submit">लॉगिन करा</button>
+      </form>
+
+      <!-- SIGNUP FORM -->
+      <form id="signupForm" class="auth-form" onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label for="fullName">पूर्ण नाव (Full Name)</label>
+          <input type="text" id="fullName" placeholder="उदा. राहुल पाटील" required>
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">ईमेल आयडी (Email)</label>
+          <input type="email" id="signupEmail" placeholder="yourname@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">पासवर्ड (Password)</label>
+          <input type="password" id="signupPassword" placeholder="••••••••" required>
+        </div>
+        <div class="form-group">
+          <label for="userRole">तुम्हाला PIXORA कसे वापरायचे आहे?</label>
+          <select id="userRole" required>
+            <option value="Buyer">ग्राहकासाठी (Download Vector/PSD)</option>
+            <option value="Contributor">विक्रेत्यासाठी / Contributor (Sell Vector/PSD/Photos)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">अकाउंट तयार करा</button>
+      </form>
+    </div>
+
+    <!-- PROFILE DASHBOARD CARD (लॉगिन झाल्यावर दिसेल) -->
+    <div class="profile-card" id="profileCard">
+      <h2 id="userName">नमस्ते, युजर!</h2>
+      <p id="userEmailText" style="color: #666; margin-bottom: 0.5rem;"></p>
+      <span class="role-badge" id="userRoleBadge">Contributor</span>
+      <p>तुमचे अकाउंट यशस्वीरित्या सुरु झाले आहे.</p>
+      
+      <div class="action-btns">
+        <a href="creator.html" id="sellBtn" class="btn-primary">PSD/Vectors अपलोड करा ➔</a>
+        <button onclick="handleLogout()" class="btn-secondary">लॉगआउट</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <a class="footer-brand" href="index.html">PIXORA</a>
+    <span>Designed for Maharashtra's creative community.</span>
+    <a href="contact.html">Contact</a>
+    <span>© 2026 PIXORA</span>
+  </footer>
+</main>
+
+<script src="script.js"></script>
+<script>
+  // Tabs Switch Functionality
+  function switchTab(tab) {
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const tabs = document.querySelectorAll('.auth-tab');
+
+    if (tab === 'login') {
+      loginForm.classList.add('active');
+      signupForm.classList.remove('active');
+      tabs[0].classList.add('active');
+      tabs[1].classList.remove('active');
+    } else {
+      signupForm.classList.add('active');
+      loginForm.classList.remove('active');
+      tabs[1].classList.add('active');
+      tabs[0].classList.remove('active');
+    }
+  }
+
+  // Handle Signup
+  function handleSignup(event) {
+    event.preventDefault();
+    const name = document.getElementById('fullName').value;
+    const email = document.getElementById('signupEmail').value;
+    const role = document.getElementById('userRole').value;
+
+    const userData = { name, email, role, isLoggedIn: true };
+    localStorage.setItem('pixora_user', JSON.stringify(userData));
+    checkAuthStatus();
+  }
+
+  // Handle Login
+  function handleLogin(event) {
+    event.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    // डेमोसाठी मुलभूत डेटा
+    const userData = { name: "Creative Member", email: email, role: "Contributor", isLoggedIn: true };
+    localStorage.setItem('pixora_user', JSON.stringify(userData));
+    checkAuthStatus();
+  }
+
+  // Handle Logout
+  function handleLogout() {
+    localStorage.removeItem('pixora_user');
+    checkAuthStatus();
+  }
+
+  // Check user login status on page load
+  function checkAuthStatus() {
+    const authContainer = document.getElementById('authContainer');
+    const profileCard = document.getElementById('profileCard');
+    const savedUser = localStorage.getItem('pixora_user');
+
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      authContainer.style.display = 'none';
+      profileCard.style.display = 'block';
+
+      document.getElementById('userName').innerText = "नमस्ते, " + user.name + "!";
+      document.getElementById('userEmailText').innerText = user.email;
+      document.getElementById('userRoleBadge').innerText = "अकाउंट टाईप: " + user.role;
+
+      if(user.role === 'Buyer') {
+        document.getElementById('sellBtn').innerText = "डिजाईन्स एक्सप्लोर करा ➔";
+        document.getElementById('sellBtn').href = "explore.html";
+      } else {
+        document.getElementById('sellBtn').innerText = "PSD/Vectors अपलोड करा ➔";
+        document.getElementById('sellBtn').href = "creator.html";
+      }
+    } else {
+      authContainer.style.display = 'block';
+      profileCard.style.display = 'none';
+    }
+  }
+
+  // Run on page load
+  window.onload = checkAuthStatus;
+</script>
+</body>
+</html>
