@@ -15,6 +15,7 @@
   border: 0 !important;
   outline: none !important;
   box-shadow: none !important;
+  background: transparent;
 }
 .profile-dot:focus, #profileMenuButton:focus,
 .profile-dot:focus-visible, #profileMenuButton:focus-visible {
@@ -22,16 +23,16 @@
   box-shadow: none !important;
 }
 
-/* Single logo styling for mobile header */
-.mobile-brand {
+/* Single clean logo in mobile header */
+.topbar-logo {
   display: inline-flex;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 8px;
 }
-.mobile-brand img {
+.topbar-logo img {
   display: block;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
 }
 
@@ -85,8 +86,8 @@
 <main class="main">
 <header class="topbar">
 <button class="menu-button" id="menuButton" aria-label="Open menu">☰</button>
-<!-- मोबाईल हेडरमधील एकच लोगो -->
-<a class="mobile-brand" href="index.html" aria-label="PIXORA home"><img src="assets/pixora-logo.png" alt="PIXORA"></a>
+<!-- फक्त एकच लोगो इथे ठेवला आहे -->
+<a class="topbar-logo" href="index.html" aria-label="PIXORA home"><img src="assets/pixora-logo.png" alt="PIXORA"></a>
 <div class="topbar-spacer"></div>
 <a class="top-link" href="plans.html">PLANS</a>
 <div class="profile-menu-wrap">
