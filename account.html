@@ -70,8 +70,10 @@
        NEVER put a service_role/secret key in browser code. -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
+    (() => {
     // 1) Replace these two values with Supabase: Project Settings > API.
 const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_2Xb08RsHWptXCIxc_R8Iow_Gzmkb-m0";
     const isConfigured = SUPABASE_URL.startsWith("https://") &&
       !SUPABASE_URL.includes("YOUR_SUPABASE") &&
       !SUPABASE_ANON_KEY.includes("YOUR_SUPABASE");
@@ -224,6 +226,7 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
       message('Setup needed: connect Supabase to enable real accounts, secure login, password reset and database-backed sessions.', 'error');
     }
     updateMode();
+    })();
   </script>
 </body>
 </html>
