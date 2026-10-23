@@ -105,3 +105,18 @@ if(menuButton&&sidebar){
     }, 350);
   });
 })();
+const searchInput = document.getElementById('searchInput');
+const searchContainer = document.getElementById('searchContainer');
+
+if (searchInput && searchContainer) {
+  searchInput.addEventListener('focus', () => {
+    searchContainer.classList.add('active-top');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!searchContainer.contains(e.target)) {
+      searchContainer.classList.remove('active-top');
+    }
+  });
+}
