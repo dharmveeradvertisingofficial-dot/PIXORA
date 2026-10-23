@@ -58,11 +58,6 @@
       <p class="switch"><span id="switchPrompt">Already have an account?</span> <a href="#" id="switchLink">Log in</a></p>
     </section>
 
-    <section class="panel" id="accountPanel" aria-live="polite">
-      <h2>My Account</h2>
-      <p id="accountName"></p><p id="accountEmail"></p>
-      <button class="continue" id="logoutButton" type="button">Log out</button>
-    </section>
     <div class="notice" id="notice" role="status"></div>
   </main>
 
@@ -79,7 +74,6 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
       !SUPABASE_ANON_KEY.includes("YOUR_SUPABASE");
 
     const authSection = document.getElementById('authSection');
-    const accountPanel = document.getElementById('accountPanel');
     const title = document.getElementById('title');
     const subtitle = document.getElementById('subtitle');
     const nameField = document.getElementById('name');
@@ -125,23 +119,11 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
       document.getElementById('appleButton').hidden = reset;
     }
     function showAccount(user) {
-      // Keep the account details available briefly, then return to PIXORA home.
-      // The one-time flag prevents redirect loops when the page is revisited.
-      authSection.hidden = true;
-      accountPanel.style.display = 'block';
-      document.getElementById('accountName').textContent = 'Name: ' + (user.user_metadata?.full_name || user.user_metadata?.name || 'PIXORA user');
-      document.getElementById('accountEmail').textContent = 'Email: ' + (user.email || '');
-      const params = new URLSearchParams(window.location.search);
-      const cameFromAuth = params.has('code') || params.has('access_token') ||
-        sessionStorage.getItem('pixora_auth_redirect') === '1';
-      if (cameFromAuth) {
-        sessionStorage.removeItem('pixora_auth_redirect');
-        window.location.replace('index.html');
-      }
+      // Successful authentication returns directly to the PIXORA home page.
+      window.location.replace('index.html');
     }
     function showAuth() {
       authSection.hidden = false;
-      accountPanel.style.display = 'none';
     }
 
     switchLink.addEventListener('click', e => {
@@ -170,7 +152,6 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
           });
           if (error) throw error;
           if (data.session && data.user) {
-            sessionStorage.setItem('pixora_auth_redirect', '1');
             showAccount(data.user);
             message('Your PIXORA account was created successfully.', 'success');
           } else {
@@ -180,7 +161,6 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
         } else if (mode === 'login') {
           const { data, error } = await supabase.auth.signInWithPassword({ email, password: passwordField.value });
           if (error) throw error;
-          sessionStorage.setItem('pixora_auth_redirect', '1');
           showAccount(data.user);
           message('You are now logged in securely.', 'success');
         } else {
@@ -198,7 +178,6 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
 
     async function oauth(provider) {
       clearMessage();
-      sessionStorage.setItem('pixora_auth_redirect', '1');
       if (!isConfigured || !supabase) {
         message('Authentication is not connected yet. Add your Supabase settings and enable this provider in Supabase Auth.', 'error');
         return;
@@ -213,21 +192,15 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
     }
     document.getElementById('googleButton').addEventListener('click', () => oauth('google'));
     document.getElementById('appleButton').addEventListener('click', () => oauth('apple'));
-    document.getElementById('logoutButton').addEventListener('click', async () => {
-      if (!supabase) return;
-      const { error } = await supabase.auth.signOut();
-      if (error) message(error.message, 'error');
-      else { showAuth(); mode = 'login'; updateMode(); clearMessage(); message('You have been logged out.', 'success'); }
-    });
 
     if (isConfigured && window.supabase?.createClient) {
       supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       supabase.auth.getSession().then(({ data, error }) => {
         if (error) message(error.message, 'error');
-        else if (data.session?.user) showAccount(data.session.user);
+        else if (data.session?.user) window.location.replace('index.html');
       });
       supabase.auth.onAuthStateChange((_event, session) => {
-        if (session?.user) showAccount(session.user);
+        if (session?.user) window.location.replace('index.html');
         else showAuth();
       });
       // If redirected from a password reset link, Supabase processes the session in the browser.
