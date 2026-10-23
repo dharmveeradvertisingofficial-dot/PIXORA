@@ -38,7 +38,18 @@
 <a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a>
 <nav class="main-nav" aria-label="Main navigation">
 <a class="nav-link active" href="index.html"><span class="nav-icon">⌂</span><span>Home</span></a>
-<a class="nav-link" href="search.html"><span class="nav-icon">⌕</span><span>Search</span></a>
+  <form class="search" action="search.html" id="homeSearchForm">
+  <input
+    type="search"
+    name="q"
+    id="homeSearchInput"
+    placeholder="Search banners, PSDs, festivals, vectors..."
+    aria-label="Search designs"
+    enterkeyhint="search"
+    autocomplete="off"
+  >
+  <button type="submit">Search</button>
+  </form>
 <a class="nav-link" href="stock.html"><span class="nav-icon">▧</span><span>Stock</span></a>
 <a class="nav-link" href="explore.html"><span class="nav-icon">✧</span><span>Explore</span></a>
 <a class="nav-link" href="projects.html"><span class="nav-icon">▱</span><span>Projects</span></a>
