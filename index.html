@@ -7,7 +7,90 @@
 
 <style>
 /* Mobile header: show the PIXORA logo instead of the wordmark, including when the menu opens. */
+.mobile-brand { display: inline-flex; align-items: <!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFF8E1"><meta name="description" content="PIXORA — Maharashtra-inspired creative design marketplace">
+<title>Home | PIXORA</title><link rel="icon" href="assets/pixora-logo.png"><link rel="stylesheet" href="styles.css">
+<style>
+/* Keep the avatar circular but remove the visible outline/border. */
+.profile-dot, #profileMenuButton {
+  border:  0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.profile-dot:focus, #profileMenuButton:focus,
+.profile-dot:focus-visible, #profileMenuButton:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+</style>
+
+<style>
+/* Mobile header: show the PIXORA logo instead of the wordmark, including when the menu opens. */
 .mobile-brand { display: inline-flex; align-items: center; justify-content: center; }
+.mobile-brand img { display: block; width: 34px; height: 34px; object-fit: contain; }
+@media (min-width: 769px) {
+  .mobile-brand img { display: none; }
+}
+@media (max-width: 768px) {
+  .mobile-brand { font-size: 0 !important; line-height: 0; }
+  .mobile-brand img { display: block; }
+}
+</style>
+
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+<a class="brand" href="index.html"><img src="assets/pixora-logo.png" alt="PIXORA logo"><span>PIXORA</span></a>
+<a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a>
+<nav class="main-nav" aria-label="Main navigation">
+<a class="nav-link active" href="index.html"><span class="nav-icon">⌂</span><span>Home</span></a>
+<form class="search" action="search.html" id="homeHeroSearch">
+  <input
+    type="search"
+    name="q"
+    id="homeHeroSearchInput"
+    placeholder="Search banners, PSDs, festivals, vectors..."
+    aria-label="Search designs"
+    enterkeyhint="search"
+    autocomplete="off"
+  >
+  <button type="submit">Search</button>
+</form>
+<a class="nav-link" href="stock.html"><span class="nav-icon">▧</span><span>Stock</span></a>
+<a class="nav-link" href="explore.html"><span class="nav-icon">✧</span><span>Explore</span></a>
+<a class="nav-link" href="projects.html"><span class="nav-icon">▱</span><span>Projects</span></a>
+<a class="nav-link" href="library.html"><span class="nav-icon">▤</span><span>Library</span></a>
+<a class="nav-link" href="creator.html"><span class="nav-icon">✎</span><span>Become a Creator</span></a>
+</nav>
+<div class="sidebar-bottom"><p class="sidebar-note">A home for Maharashtra's creativity.</p><a class="account-link" href="account.html">◉ &nbsp; Login / Sign up</a></div>
+</aside>
+<main class="main">
+<header class="topbar">
+<button class="menu-button" id="menuButton" aria-label="Open menu">☰</button><a class="mobile-brand" href="index.html" aria-label="PIXORA home"><img src="assets/pixora-logo.png" alt="PIXORA"></a><div class="topbar-spacer"></div>
+<a class="top-link" href="plans.html">PLANS</a>
+<div class="profile-menu-wrap">
+<button class="profile-dot" id="profileMenuButton" aria-label="Open account menu" aria-expanded="false">P</button>
+<div class="profile-menu" id="profileMenu" hidden>
+<div class="profile-menu-user"><strong id="menuUserName">PIXORA account</strong><small id="menuUserEmail">Sign in to personalize PIXORA</small></div>
+<a href="plans.html">Get a Plan</a><a href="settings.html">Settings</a><a href="collections.html">My Collections</a>
+<a href="account.html" id="menuLoginLink">Log in / Sign up</a><button type="button" id="menuLogoutButton" hidden>Log out</button>
+</div></div></header>
+<section class="hero"><p class="eyebrow">MADE FOR LOCAL CREATORS</p><h1>Good ideas deserve<br><span>a beautiful design.</span></h1><p class="lead">Discover Marathi designs, festival creatives, banners, backgrounds and editable resources — all in one place.</p>
+<form class="search" action="search.html"><input name="q" placeholder="Search banners, PSDs, festivals, vectors..." aria-label="Search designs"><button>Search</button></form>
+<div class="quick-links"><a href="images.html">▧<span>Images</span></a><a href="vectors.html">✳<span>Vectors</span></a><a href="psd.html">PSD<span>PSD Files</span></a><a href="templates.html">▦<span>Templates</span></a></div></section>
+<section class="section"><div class="section-head"><div><p class="eyebrow">START EXPLORING</p><h2>Popular categories</h2></div><a class="text-link" href="explore.html">Explore all →</a></div>
+<div class="category-grid"><a class="category cat1" href="festival.html"><b>✺ Festival Designs</b><small>Ganeshotsav, Diwali & more</small></a><a class="category cat2" href="marathi.html"><b>अ Marathi Creatives</b><small>Typography & local culture</small></a><a class="category cat3" href="banners.html"><b>▱ Banners & Posters</b><small>Events, shops and promotions</small></a><a class="category cat4" href="backgrounds.html"><b>◈ Backgrounds</b><small>Textures, patterns & scenes</small></a></div></section>
+<section class="section"><div class="section-head"><div><p class="eyebrow">HANDPICKED FOR YOU</p><h2>Explore designs</h2></div><a class="text-link" href="explore.html">View all →</a></div>
+<div class="design-grid"><a class="design-card" href="design-detail.html"><div class="preview p1"><small>FESTIVAL</small><strong>गणेशोत्सव</strong><span>उत्सव आनंदाचा</span></div><b>Ganesh Festival Creative</b><small>Sample preview · Demo</small></a>
+<a class="design-card" href="design-detail.html"><div class="preview p2"><small>EVENT</small><strong>महाराष्ट्र</strong><span>तुमच्या कल्पनेला नवी ओळख</span></div><b>Marathi Event Banner</b><small>Sample preview · Demo</small></a>
+<a class="design-card" href="design-detail.html"><div class="preview p3"><small>BACKGROUND</small><strong>Abstract</strong><span>Background collection</span></div><b>Warm Abstract Background</b><small>Sample preview · Demo</small></a></div></section>
+<section class="creator-cta"><div><p class="eyebrow">FOR DESIGNERS</p><h2>Your creativity can reach<br>the whole community.</h2><p>Share your original designs and prepare to build your creator portfolio on PIXORA.</p></div><a class="button" href="creator.html">Become a Creator →</a></section>
+<footer class="footer"><a class="footer-brand" href="index.html">PIXORA</a><span>Designed for Maharashtra's creative community.</span><a href="contact.html">Contact</a><span>© 2026 PIXORA</span></footer>
+</main><script src="script.js"></script>
+</body></html>; justify-content: center; }
 .mobile-brand img { display: block; width: 34px; height: 34px; object-fit: contain; }
 @media (min-width: 769px) {
   .mobile-brand img { display: none; }
