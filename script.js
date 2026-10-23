@@ -149,3 +149,23 @@ if(form){
     }, 300);
   });
 })();
+/* PIXORA Home Page Mobile Search */
+(function () {
+  const input = document.getElementById("homeHeroSearchInput");
+
+  if (!input) return;
+
+  input.addEventListener("focus", function () {
+    setTimeout(function () {
+      const rect = input.getBoundingClientRect();
+
+      if (rect.bottom > window.innerHeight * 0.65 ||
+          rect.top < 0) {
+        input.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }
+    }, 250);
+  });
+})();
