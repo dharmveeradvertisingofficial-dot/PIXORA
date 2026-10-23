@@ -28,6 +28,40 @@ if(menuButton&&sidebar){
   menuButton.addEventListener('click',()=>{
     if(sidebar.classList.contains('open'))closeSidebar();
     else openSidebar();
+  });
+  backdrop.addEventListener('click',closeSidebar);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSidebar();});
+  document.querySelectorAll('.sidebar a').forEach(a=>a.addEventListener('click',closeSidebar));
+  document.addEventListener('click',e=>{
+    if(window.innerWidth<=760 && sidebar.classList.contains('open') &&
+       !sidebar.contains(e.target) && !menuButton.contains(e.target) &&
+       !e.target.closest('.sidebar-backdrop')) closeSidebar();
+  });
+}
+
+const form=document.getElementById('searchForm');
+if(form){
+  const input=document.getElementById('q');
+  const results=document.getElementById('results');
+  const message=document.getElementById('searchMessage');
+  const items=[
+    {title:'Ganesh Festival Creative',category:'Festival',href:'festival.html',className:'p1',label:'गणेशोत्सव'},
+    {title:'Marathi Event Banner',category:'Banner',href:'banners.html',className:'p2',label:'महाराष्ट्र'},
+    {title:'Warm Abstract Background',category:'Background',href:'backgrounds.html',className:'p3',label:'Abstract'}
+  ];
+  const params=new URLSearchParams(location.search);
+  if(input)input.value=params.get('q')||'';
+  function runSearch(e){
+    if(e)e.preventDefault();
+    const q=(input?.value||'').toLowerCase().trim();
+    const found=items.filter(x=>(x.title+' '+x.category+' '+x.label).toLowerCase().includes(q));
+    if(results)results.innerHTML=found.map(x=>`<a class="design-card" href="${x.href}"><div class="preview ${x.className}"><strong>${x.label}</strong></div><b>${x.title}</b><small>Sample preview · Demo</small></a>`).join('');
+    if(message)message.textContent=found.length?`${found.length} sample result(s).`:'No sample designs found. Try “festival”, “banner” or “background”.';
+  }
+  form.addEventListener('submit',runSearch);
+  if(input&&input.value)runSearch();
+}
+/* PIXORA account menu + authenticated creator upload */
 (function(){
  const SUPABASE_URL='https://gvqhwcnaycxjrlyycbci.supabase.co';
  const SUPABASE_ANON_KEY='sb_publishable_2Xb08RsHWptXCIxc_R8Iow_Gzmkb-m0';
@@ -98,6 +132,51 @@ if(menuButton&&sidebar){
    }catch(err){if(msg)msg.textContent='Upload could not finish: '+(err.message||'Check Supabase setup and Storage policies.');}
    finally{if(submit){submit.disabled=!currentUser;submit.textContent='Upload design';}}
  });
+})();
+/* PIXORA mobile search improvement */
+(function () {
+  const form = document.getElementById("homeSearchForm");
+  const input = document.getElementById("homeSearchInput");
+
+  if (!form || !input) return;
+
+  input.addEventListener("focus", function () {
+    setTimeout(function () {
+      input.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }, 300);
+  });
+})();
+/* PIXORA Home Page Mobile Search */
+(function () {
+  const input = document.getElementById("homeHeroSearchInput");
+
+  if (!input) return;
+
+  input.addEventListener("focus", function () {
+    setTimeout(function () {
+      const rect = input.getBoundingClientRect();
+
+      if (rect.bottom > window.innerHeight * 0.65 ||
+          rect.top < 0) {
+        input.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }
+    }, 250);
+  });
+})();
+// PIXORA Home Page Search - Mobile Fix
+(function () {
+  const input = document.getElementById("homeHeroSearchInput");
+
+  if (!input) return;
+
+  input.addEventListener("focus", function () {
+    setTimeout(function () {
       input.scrollIntoView({
         behavior: "smooth",
         block: "center"
@@ -105,18 +184,3 @@ if(menuButton&&sidebar){
     }, 350);
   });
 })();
-const searchInput = document.getElementById('searchInput');
-const searchContainer = document.getElementById('searchContainer');
-
-if (searchInput && searchContainer) {
-  searchInput.addEventListener('focus', () => {
-    searchContainer.classList.add('active-top');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!searchContainer.contains(e.target)) {
-      searchContainer.classList.remove('active-top');
-    }
-  });
-}
