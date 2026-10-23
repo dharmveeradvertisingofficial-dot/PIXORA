@@ -169,3 +169,18 @@ if(form){
     }, 250);
   });
 })();
+// PIXORA Home Page Search - Mobile Fix
+(function () {
+  const input = document.getElementById("homeHeroSearchInput");
+
+  if (!input) return;
+
+  input.addEventListener("focus", function () {
+    setTimeout(function () {
+      input.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }, 350);
+  });
+})();
