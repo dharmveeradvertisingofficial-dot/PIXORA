@@ -1,4 +1,30 @@
-const menuButton=document.getElementById('menuButton');const sidebar=document.getElementById('sidebar');if(menuButton&&sidebar){menuButton.addEventListener('click',()=>sidebar.classList.toggle('open'));document.querySelectorAll('.sidebar a').forEach(a=>a.addEventListener('click',()=>sidebar.classList.remove('open')))}
+const menuButton = document.getElementById('menuButton');
+const sidebar = document.getElementById('sidebar');
+
+if (menuButton && sidebar) {
+    // १. थ्री-लाईनवर क्लिक केल्यावर साईडबार उघडणे/बंद करणे
+    menuButton.addEventListener('click', (e) => {
+        sidebar.classList.toggle('open');
+        e.stopPropagation(); // मोबाईलवर क्लिक बाहेर पसरण्यापासून रोखतो (खूप महत्त्वाचे)
+    });
+
+    // २. साईडबारमधील कोणत्याही लिंकवर क्लिक केल्यास तो बंद करणे
+    document.querySelectorAll('.sidebar a').forEach(a => 
+        a.addEventListener('click', () => sidebar.classList.remove('open'))
+    );
+
+    // ३. नवीन बदल: फक्त मोबाईलवर बाहेर कुठेही क्लिक/टच केल्यास साईडबार आत जाणे (बंद होणे)
+    document.addEventListener('click', (event) => {
+        if (window.innerWidth <= 768) { // फक्त मोबाईलसाठी
+            // जर साईडबार उघडा असेल आणि क्लिक साईडबारच्या किंवा मेनू बटनच्या बाहेर झाले असेल
+            if (sidebar.classList.contains('open') && !sidebar.contains(event.target) && event.target !== menuButton) {
+                sidebar.classList.remove('open');
+            }
+        }
+    });
+}
+
+// --- इथून पुढे तुमचा शोध (Search) आणि इतर सर्व कोड जसाच्या तसा सुरक्षित आहे ---
 const form=document.getElementById('searchForm');if(form){const input=document.getElementById('q');const results=document.getElementById('results');const message=document.getElementById('searchMessage');const items=[{title:'Ganesh Festival Creative',category:'Festival',href:'festival.html',className:'p1',label:'गणेशोत्सव'},{title:'Marathi Event Banner',category:'Banner',href:'banners.html',className:'p2',label:'महाराष्ट्र'},{title:'Warm Abstract Background',category:'Background',href:'backgrounds.html',className:'p3',label:'Abstract'}];const params=new URLSearchParams(location.search);if(input)input.value=params.get('q')||'';function runSearch(e){if(e)e.preventDefault();const q=(input.value||'').toLowerCase().trim();const found=items.filter(x=>(x.title+' '+x.category+' '+x.label).toLowerCase().includes(q));results.innerHTML=found.map(x=>`<a class="design-card" href="${x.href}"><div class="preview ${x.className}"><strong>${x.label}</strong></div><b>${x.title}</b><small>Sample preview · Demo</small></a>`).join('');message.textContent=found.length?`${found.length} sample result(s).`:'No sample designs found. Try “festival”, “banner” or “background”.';}form.addEventListener('submit',runSearch);if(input&&input.value)runSearch();}
 /* PIXORA account menu + authenticated creator upload */
 (function(){
