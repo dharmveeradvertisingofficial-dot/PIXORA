@@ -1,34 +1,46 @@
 const menuButton = document.getElementById('menuButton');
 const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
 
 if (menuButton && sidebar) {
-    // १. थ्री-लाईनवर क्लिक केल्यावर साईडबार उघडणे/बंद करणे
+    // थ्री-लाईनवर क्लिक केल्यावर साईडबार उघडणे/बंद करणे
     menuButton.addEventListener('click', (e) => {
         sidebar.classList.toggle('open');
-        e.stopPropagation(); // मोबाईलवर क्लिक बाहेर पसरण्यापासून रोखतो (खूप महत्त्वाचे)
-    });
-
-    // २. साईडबारमधील कोणत्याही लिंकवर क्लिक केल्यास तो बंद करणे
-    document.querySelectorAll('.sidebar a').forEach(a => 
-        a.addEventListener('click', () => sidebar.classList.remove('open'))
-    );
-
-    // ३. नवीन बदल: फक्त मोबाईलवर बाहेर कुठेही क्लिक/टच केल्यास साईडबार आत जाणे (बंद होणे)
-    document.addEventListener('click', (event) => {
-        if (window.innerWidth <= 768) { // फक्त मोबाईलसाठी
-            // जर साईडबार उघडा असेल आणि क्लिक साईडबारच्या किंवा मेनू बटनच्या बाहेर झाले असेल
-            if (sidebar.classList.contains('open') && !sidebar.contains(event.target) && event.target !== menuButton) {
-                sidebar.classList.remove('open');
+        e.stopPropagation();
+        
+        // मोबाईलवर साईडबार उघडल्यावर पडदा दाखवणे
+        if (overlay && window.innerWidth <= 768) {
+            if (sidebar.classList.contains('open')) {
+                overlay.style.display = 'block';
+            } else {
+                overlay.style.display = 'none';
             }
         }
     });
+
+    // साईडबारमधील कोणत्याही लिंकवर क्लिक केल्यास साईडबार बंद करणे
+    document.querySelectorAll('.sidebar a').forEach(a => {
+        a.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            if (overlay) overlay.style.display = 'none';
+        });
+    });
+
+    // मोबाईलवर साईडबारच्या बाहेर (काळ्या पडद्यावर) कुठेही टच केल्यास गॅरंटीने बंद करणे
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.style.display = 'none';
+        });
+    }
 }
 
-// --- इथून पुढे तुमचा शोध (Search) आणि इतर सर्व कोड जसाच्या तसा सुरक्षित आहे ---
+/* --- इथून पुढे तुमचा शोध (Search) चा मूळ कोड सुरक्षित आहे --- */
 const form=document.getElementById('searchForm');if(form){const input=document.getElementById('q');const results=document.getElementById('results');const message=document.getElementById('searchMessage');const items=[{title:'Ganesh Festival Creative',category:'Festival',href:'festival.html',className:'p1',label:'गणेशोत्सव'},{title:'Marathi Event Banner',category:'Banner',href:'banners.html',className:'p2',label:'महाराष्ट्र'},{title:'Warm Abstract Background',category:'Background',href:'backgrounds.html',className:'p3',label:'Abstract'}];const params=new URLSearchParams(location.search);if(input)input.value=params.get('q')||'';function runSearch(e){if(e)e.preventDefault();const q=(input.value||'').toLowerCase().trim();const found=items.filter(x=>(x.title+' '+x.category+' '+x.label).toLowerCase().includes(q));results.innerHTML=found.map(x=>`<a class="design-card" href="${x.href}"><div class="preview ${x.className}"><strong>${x.label}</strong></div><b>${x.title}</b><small>Sample preview · Demo</small></a>`).join('');message.textContent=found.length?`${found.length} sample result(s).`:'No sample designs found. Try “festival”, “banner” or “background”.';}form.addEventListener('submit',runSearch);if(input&&input.value)runSearch();}
-/* PIXORA account menu + authenticated creator upload */
+
+/* --- PIXORA account menu + authenticated creator upload --- */
 (function(){
- const SUPABASE_URL='https://gvqhwcnaycxjrlyycbci.supabase.co';
+ const SUPABASE_URL='https://supabase.co';
  const SUPABASE_ANON_KEY='sb_publishable_2Xb08RsHWptXCIxc_R8Iow_Gzmkb-m0';
  const menuButton=document.getElementById('profileMenuButton');
  const menu=document.getElementById('profileMenu');
@@ -52,7 +64,7 @@ const form=document.getElementById('searchForm');if(form){const input=document.g
    const collections=document.getElementById('collectionsStatus');if(collections)collections.textContent=user?'Signed in as '+(user.email||'PIXORA user')+'. Saved collections require the database setup in PIXORA-SUPABASE-SETUP.sql.':'Sign in to view your collections.';
  }
  if(window.supabase?.createClient){client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);client.auth.getSession().then(({data})=>setMenuUser(data.session?.user||null));client.auth.onAuthStateChange((_event,session)=>setMenuUser(session?.user||null));}
- else {const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';sc.onload=()=>{client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);client.auth.getSession().then(({data})=>setMenuUser(data.session?.user||null));client.auth.onAuthStateChange((_event,session)=>setMenuUser(session?.user||null));};document.head.appendChild(sc);}
+ else {const sc=document.createElement('script');sc.src='https://jsdelivr.net>{client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);client.auth.getSession().then(({data})=>setMenuUser(data.session?.user||null));client.auth.onAuthStateChange((_event,session)=>setMenuUser(session?.user||null));};document.head.appendChild(sc);}
  const logout=document.getElementById('menuLogoutButton');if(logout)logout.addEventListener('click',async()=>{if(!client){location.href='account.html';return;}const {error}=await client.auth.signOut();if(error)alert(error.message);else location.href='index.html';});
  const uploadForm=document.getElementById('designUploadForm');
  if(uploadForm)uploadForm.addEventListener('submit',async e=>{
