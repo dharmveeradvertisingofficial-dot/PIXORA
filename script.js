@@ -1,4 +1,4 @@
-const menuButton=document.getElementById('menuButton');
+oconst menuButton=document.getElementById('menuButton');
 const sidebar=document.getElementById('sidebar');
 
 function closeSidebar(){
