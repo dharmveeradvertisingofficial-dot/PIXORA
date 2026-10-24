@@ -2,10 +2,11 @@
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#FFF8E1"><meta name="description" content="PIXORA — Maharashtra-inspired creative design marketplace"><title>Home | PIXORA</title><link rel="icon" href="assets/pixora-logo.png"><link rel="stylesheet" href="styles.css"></head>
 <body>
-<!-- १. हा नवीन पडदा (Overlay) जो बाहेर कुठेही टच केल्यास साईडबार बंद करेल -->
-<div id="sidebarOverlay" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); z-index:99; display:none;"></div>
+<!-- १. z-index: 980 केला (ज्यामुळे हा साईडबारच्या मागे राहील आणि बॅकग्राउंडला डिम करेल) -->
+<div id="sidebarOverlay" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); z-index:980; display:none;"></div>
 
-<aside class="sidebar" id="sidebar"><a class="brand" href="index.html"><img src="assets/pixora-logo.png" alt="PIXORA logo"><span>PIXORA</span></a><a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a><nav class="main-nav" aria-label="Main navigation"><a class="nav-link active" href="index.html"><span class="nav-icon">⌂</span><span>Home</span></a>
+<!-- २. z-index: 990 इनलाईन दिला जेणेकरून साईडबार पडद्याच्या वर स्पष्ट दिसेल आणि लिंक्स क्लिक होतील -->
+<aside class="sidebar" id="sidebar" style="z-index: 990;"><a class="brand" href="index.html"><img src="assets/pixora-logo.png" alt="PIXORA logo"><span>PIXORA</span></a><a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a><nav class="main-nav" aria-label="Main navigation"><a class="nav-link active" href="index.html"><span class="nav-icon">⌂</span><span>Home</span></a>
 <a class="nav-link " href="search.html"><span class="nav-icon">⌕</span><span>Search</span></a>
 <a class="nav-link " href="stock.html"><span class="nav-icon">▧</span><span>Stock</span></a>
 <a class="nav-link " href="explore.html"><span class="nav-icon">✧</span><span>Explore</span></a>
@@ -22,7 +23,7 @@
 <footer class="footer"><a class="footer-brand" href="index.html">PIXORA</a><span>Designed for Maharashtra's creative community.</span><a href="contact.html">Contact</a><span>© 2026 PIXORA</span></footer></main>
 <script src="script.js"></script>
 
-<!-- २. मास्टर जावास्क्रिप्ट जो बाहेर टच केल्यावर पडद्याच्या मदतीने साईडबार अचूक बंद करेल -->
+<!-- ३. पडदा मॅनेज करणारी मास्टर स्क्रिप्ट -->
 <script>
 (function() {
     const mobMenuBtn = document.getElementById('menuButton');
@@ -30,10 +31,8 @@
     const mobOverlay = document.getElementById('sidebarOverlay');
 
     if (mobMenuBtn && mobSidebar && mobOverlay) {
-        // जेव्हा थ्री-लाईन (☰) वर क्लिक होईल
         mobMenuBtn.addEventListener('click', function() {
             if (window.innerWidth <= 768) {
-                // तुमच्या script.js मधील .open क्लासToggle व्हायला ५०ms चा वेळ देऊन पडदा दाखवतो
                 setTimeout(() => {
                     if (mobSidebar.classList.contains('open')) {
                         mobOverlay.style.display = 'block';
@@ -44,7 +43,6 @@
             }
         });
 
-        // जेव्हा बाहेर कुठेही (पडद्यावर) टच होईल तेव्हा साईडबार आणि पडदा दोन्ही बंद करणे
         mobOverlay.addEventListener('click', function() {
             mobSidebar.classList.remove('open');
             mobOverlay.style.display = 'none';
