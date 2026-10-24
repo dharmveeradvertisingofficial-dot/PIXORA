@@ -58,6 +58,11 @@
       <p class="switch"><span id="switchPrompt">Already have an account?</span> <a href="#" id="switchLink">Log in</a></p>
     </section>
 
+    <section class="panel" id="accountPanel" aria-live="polite">
+      <h2>My Account</h2>
+      <p id="accountName"></p><p id="accountEmail"></p>
+      <button class="continue" id="logoutButton" type="button">Log out</button>
+    </section>
     <div class="notice" id="notice" role="status"></div>
   </main>
 
@@ -74,6 +79,7 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
       !SUPABASE_ANON_KEY.includes("YOUR_SUPABASE");
 
     const authSection = document.getElementById('authSection');
+    const accountPanel = document.getElementById('accountPanel');
     const title = document.getElementById('title');
     const subtitle = document.getElementById('subtitle');
     const nameField = document.getElementById('name');
@@ -119,11 +125,14 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
       document.getElementById('appleButton').hidden = reset;
     }
     function showAccount(user) {
-      // Successful authentication returns directly to the PIXORA home page.
-      window.location.replace('index.html');
+      authSection.hidden = true;
+      accountPanel.style.display = 'block';
+      document.getElementById('accountName').textContent = 'Name: ' + (user.user_metadata?.full_name || user.user_metadata?.name || 'PIXORA user');
+      document.getElementById('accountEmail').textContent = 'Email: ' + (user.email || '');
     }
     function showAuth() {
       authSection.hidden = false;
+      accountPanel.style.display = 'none';
     }
 
     switchLink.addEventListener('click', e => {
@@ -192,15 +201,21 @@ const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
     }
     document.getElementById('googleButton').addEventListener('click', () => oauth('google'));
     document.getElementById('appleButton').addEventListener('click', () => oauth('apple'));
+    document.getElementById('logoutButton').addEventListener('click', async () => {
+      if (!supabase) return;
+      const { error } = await supabase.auth.signOut();
+      if (error) message(error.message, 'error');
+      else { showAuth(); mode = 'login'; updateMode(); clearMessage(); message('You have been logged out.', 'success'); }
+    });
 
     if (isConfigured && window.supabase?.createClient) {
       supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       supabase.auth.getSession().then(({ data, error }) => {
         if (error) message(error.message, 'error');
-        else if (data.session?.user) window.location.replace('index.html');
+        else if (data.session?.user) showAccount(data.session.user);
       });
       supabase.auth.onAuthStateChange((_event, session) => {
-        if (session?.user) window.location.replace('index.html');
+        if (session?.user) showAccount(session.user);
         else showAuth();
       });
       // If redirected from a password reset link, Supabase processes the session in the browser.
