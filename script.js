@@ -132,25 +132,55 @@ if(form){
    }catch(err){if(msg)msg.textContent='Upload could not finish: '+(err.message||'Check Supabase setup and Storage policies.');}
    finally{if(submit){submit.disabled=!currentUser;submit.textContent='Upload design';}}
  });
-// Mobile Search Bar Top Animation Logic
-const homeInput = document.getElementById('homeSearchInput');
+})();
+/* PIXORA mobile search improvement */
+(function () {
+  const form = document.getElementById("homeSearchForm");
+  const input = document.getElementById("homeSearchInput");
 
-if (homeInput) {
-  const searchContainer = homeInput.closest('.search');
+  if (!form || !input) return;
 
-  if (searchContainer) {
-    homeInput.addEventListener('focus', () => {
-      if (window.innerWidth <= 768) {
-        searchContainer.classList.add('active-top');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+  input.addEventListener("focus", function () {
+    setTimeout(function () {
+      input.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }, 300);
+  });
+})();
+/* PIXORA Home Page Mobile Search */
+(function () {
+  const input = document.getElementById("homeHeroSearchInput");
+
+  if (!input) return;
+
+  input.addEventListener("focus", function () {
+    setTimeout(function () {
+      const rect = input.getBoundingClientRect();
+
+      if (rect.bottom > window.innerHeight * 0.65 ||
+          rect.top < 0) {
+        input.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
       }
-    });
+    }, 250);
+  });
+})();
+// PIXORA Home Page Search - Mobile Fix
+(function () {
+  const input = document.getElementById("homeHeroSearchInput");
 
-    document.addEventListener('click', (e) => {
-      if (!searchContainer.contains(e.target)) {
-        searchContainer.classList.remove('active-top');
-      }
-    });
-  }
-}
-  
+  if (!input) return;
+
+  input.addEventListener("focus", function () {
+    setTimeout(function () {
+      input.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }, 350);
+  });
+})();
