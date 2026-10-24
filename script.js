@@ -1,38 +1,27 @@
 const menuButton = document.getElementById('menuButton');
 const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('sidebarOverlay');
 
 if (menuButton && sidebar) {
     // थ्री-लाईनवर क्लिक केल्यावर साईडबार उघडणे/बंद करणे
-    menuButton.addEventListener('click', (e) => {
+    menuButton.addEventListener('click', (event) => {
         sidebar.classList.toggle('open');
-        e.stopPropagation();
-        
-        // मोबाईलवर साईडबार उघडल्यावर पडदा दाखवणे
-        if (overlay && window.innerWidth <= 768) {
-            if (sidebar.classList.contains('open')) {
-                overlay.style.display = 'block';
-            } else {
-                overlay.style.display = 'none';
+        event.stopPropagation(); // हे क्लिक बाहेर जाण्यापासून रोखतं, ज्यामुळे साईडबार लगेच बंद होत नाही
+    });
+
+    // साईडबारमधील कोणत्याही लिंकवर क्लिक केल्यास तो बंद करणे
+    document.querySelectorAll('.sidebar a').forEach(a => {
+        a.addEventListener('click', () => sidebar.classList.remove('open'));
+    });
+
+    // मोबाईलवर बाहेर कुठेही क्लिक किंवा टच केल्यावर साईडबार बंद करणे
+    document.addEventListener('click', (event) => {
+        if (window.innerWidth <= 768) { // फक्त मोबाईल स्क्रीनसाठी
+            // जर साईडबार उघडा असेल, आणि क्लिक साईडबारच्या किंवा मेनू बटनच्या आत झाले नसेल, तरच बंद करा
+            if (sidebar.classList.contains('open') && !sidebar.contains(event.target) && event.target !== menuButton) {
+                sidebar.classList.remove('open');
             }
         }
     });
-
-    // साईडबारमधील कोणत्याही लिंकवर क्लिक केल्यास साईडबार बंद करणे
-    document.querySelectorAll('.sidebar a').forEach(a => {
-        a.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            if (overlay) overlay.style.display = 'none';
-        });
-    });
-
-    // मोबाईलवर साईडबारच्या बाहेर (काळ्या पडद्यावर) कुठेही टच केल्यास गॅरंटीने बंद करणे
-    if (overlay) {
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            overlay.style.display = 'none';
-        });
-    }
 }
 
 /* --- इथून पुढे तुमचा शोध (Search) चा मूळ कोड सुरक्षित आहे --- */
@@ -45,7 +34,7 @@ const form=document.getElementById('searchForm');if(form){const input=document.g
  const menuButton=document.getElementById('profileMenuButton');
  const menu=document.getElementById('profileMenu');
  if(menuButton&&menu){
-   menuButton.addEventListener('click',()=>{const open=menu.hidden;menu.hidden=!open;menuButton.setAttribute('aria-expanded',String(open));});
+   menuButton.addEventListener('click',(e)=>{const open=menu.hidden;menu.hidden=!open;menuButton.setAttribute('aria-expanded',String(open)); e.stopPropagation();});
    document.addEventListener('click',e=>{if(!e.target.closest('.profile-menu-wrap')){menu.hidden=true;menuButton.setAttribute('aria-expanded','false');}});
  }
  let client=null, currentUser=null;
