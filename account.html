@@ -17,7 +17,251 @@
     .subtitle{margin:0 0 27px;color:var(--muted);font-size:14px;line-height:1.55}
     .social{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;border:1px solid var(--ink);border-radius:9px;margin:0 0 10px;background:var(--ink);color:var(--cream);text-decoration:none;font-size:14px;font-weight:700;cursor:pointer}
     .social:hover,.continue:hover{background:#39372F}.social:disabled,.continue:disabled{opacity:.6;cursor:wait}
+    .divider{display:flex;align-items:center;gap:12px;margin:25px 0;color:var(--muted);font-size:12px}.divider:before,.divider:after{content:"";flex:1;height:1px;background:var(--line)}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFF8E1">
+  <meta name="description" content="Create your PIXORA account">
+  <title>Account | PIXORA</title>
+  <style>
+    :root{--cream:#FFF8E1;--ink:#25241F;--gold:#A88C4C;--muted:#777166;--line:#E5DCC5;--white:#FFFEFA}
+    *{box-sizing:border-box}html,body{min-height:100%}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:grid;place-items:center;padding:28px 16px}
+    .auth{width:min(100%,390px);text-align:center}
+    .brand{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin:0 auto 28px;color:var(--ink);text-decoration:none;font-size:24px;font-weight:850;letter-spacing:-1px}
+    .brand img{width:38px;height:38px;object-fit:contain}.brand-mark{display:none;width:38px;height:38px;border-radius:8px;background:var(--ink);color:var(--cream);align-items:center;justify-content:center;font-weight:900;font-size:24px}
+    h1{font-size:clamp(27px,6vw,31px);line-height:1.15;letter-spacing:-1.1px;margin:0 0 10px;font-weight:800}
+    .subtitle{margin:0 0 27px;color:var(--muted);font-size:14px;line-height:1.55}
+    .social{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;border:1px solid var(--ink);border-radius:9px;margin:0 0 10px;background:var(--ink);color:var(--cream);text-decoration:none;font-size:14px;font-weight:700;cursor:pointer}
+    .social:hover,.continue:hover{background:#39372F}.social:disabled,.continue:disabled{opacity:.6;cursor:wait}
     .divider{display:flex;align-items:center;gap:12px;margin:25px 0;color:var(--muted);font-size:12px}.divider:before,.divider:after{content:"";flex:1;height:1px;background:var(--line)}
+    .field{display:block;width:100%;height:48px;margin:0 0 12px;padding:0 14px;border:1px solid #D7CEB9;border-radius:9px;background:var(--white);color:var(--ink);font:inherit;font-size:14px;outline:none}
+    .field::placeholder{color:#8A8376}.field:focus{border-color:var(--gold);box-shadow:0 0 0 3px #A88C4C22}
+    .continue{width:100%;min-height:48px;border:0;border-radius:9px;background:var(--ink);color:var(--cream);font:inherit;font-size:14px;font-weight:750;cursor:pointer;margin-top:1px}
+    .newsletter{display:flex;align-items:flex-start;gap:10px;text-align:left;margin:20px 0 22px;color:var(--muted);font-size:12px;line-height:1.5}.newsletter input{margin:3px 0 0;accent-color:var(--ink)}
+    .terms{margin:0 auto 24px;max-width:330px;color:var(--muted);font-size:12px;line-height:1.6}.terms a,.switch a,.forgot{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+    .switch{margin:0;font-size:12px;color:var(--muted)}.switch a{text-decoration:none}.forgot-row{text-align:right;margin:-2px 0 14px;font-size:12px}.forgot{background:none;border:0;padding:0;cursor:pointer;font:inherit}
+    .notice{display:none;margin:14px 0 0;padding:10px 12px;border:1px solid var(--line);border-radius:9px;color:var(--ink);font-size:12px;line-height:1.5;text-align:left;overflow-wrap:anywhere}
+    .notice.error{border-color:#C46A54;color:#8B2E1C}.notice.success{border-color:#8AA47C;color:#35552B}
+    .panel{display:none;text-align:left;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:12px}.panel h2{font-size:20px;margin:0 0 8px}.panel p{font-size:13px;color:var(--muted);overflow-wrap:anywhere}.panel .continue{margin-top:8px}
+    [hidden]{display:none!important}
+    @media(max-width:420px){body{padding:22px 20px}.brand{margin-bottom:24px}}
+  </style>
+</head>
+<body>
+  <main class="auth">
+    <a class="brand" href="index.html" aria-label="PIXORA home">
+      <img src="assets/pixora-logo.png" alt="PIXORA logo" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
+      <span class="brand-mark" aria-hidden="true">P</span><span>PIXORA</span>
+    </a>
+
+    <section id="authSection">
+      <h1 id="title">Create an account</h1>
+      <p class="subtitle" id="subtitle">Join PIXORA to discover and download creative designs.</p>
+
+      <button class="social" id="googleButton" type="button">Continue with Google</button>
+      <button class="social" id="appleButton" type="button">Continue with Apple</button>
+
+      <div class="divider"><span id="dividerText">Or continue with email</span></div>
+      <form id="accountForm">
+        <input class="field" id="name" type="text" placeholder="Enter your name" autocomplete="name" required>
+        <input class="field" id="email" type="email" placeholder="Enter your email" autocomplete="email" required>
+        <input class="field" id="password" type="password" placeholder="Create a password (min. 8 characters)" autocomplete="new-password" minlength="8" required>
+        <div class="forgot-row" id="forgotRow" hidden><button class="forgot" id="forgotButton" type="button">Forgot password?</button></div>
+        <button class="continue" id="submitButton" type="submit">Create account</button>
+      </form>
+      <label class="newsletter" id="newsletterRow"><input type="checkbox" id="newsletter"><span>I do not wish to receive news and promotions from PIXORA by email.</span></label>
+      <p class="terms" id="termsText">By continuing, you agree to PIXORA's <a href="terms.html">Terms of Use</a> and <a href="privacy.html">Privacy Policy</a>.</p>
+      <p class="switch"><span id="switchPrompt">Already have an account?</span> <a href="#" id="switchLink">Log in</a></p>
+    </section>
+
+    <section class="panel" id="accountPanel" aria-live="polite">
+      <h2>My Account</h2>
+      <p id="accountName"></p><p id="accountEmail"></p>
+      <button class="continue" id="logoutButton" type="button">Log out</button>
+    </section>
+    <div class="notice" id="notice" role="status"></div>
+  </main>
+
+  <!-- Supabase browser client. Use your project's Project URL and publishable/anon key below.
+       NEVER put a service_role/secret key in browser code. -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    (() => {
+    // 1) Replace these two values with Supabase: Project Settings > API.
+const SUPABASE_URL = "https://gvqhwcnaycxjrlyycbci.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_2Xb08RsHWptXCIxc_R8Iow_Gzmkb-m0";
+    const isConfigured = SUPABASE_URL.startsWith("https://") &&
+      !SUPABASE_URL.includes("YOUR_SUPABASE") &&
+      !SUPABASE_ANON_KEY.includes("YOUR_SUPABASE");
+
+    const authSection = document.getElementById('authSection');
+    const accountPanel = document.getElementById('accountPanel');
+    const title = document.getElementById('title');
+    const subtitle = document.getElementById('subtitle');
+    const nameField = document.getElementById('name');
+    const emailField = document.getElementById('email');
+    const passwordField = document.getElementById('password');
+    const submitButton = document.getElementById('submitButton');
+    const newsletterRow = document.getElementById('newsletterRow');
+    const switchPrompt = document.getElementById('switchPrompt');
+    const switchLink = document.getElementById('switchLink');
+    const forgotRow = document.getElementById('forgotRow');
+    const notice = document.getElementById('notice');
+    let mode = 'signup';
+    let supabase = null;
+
+    function message(text, kind='') {
+      notice.textContent = text;
+      notice.className = 'notice' + (kind ? ' ' + kind : '');
+      notice.style.display = 'block';
+    }
+    function clearMessage() { notice.style.display = 'none'; notice.textContent = ''; }
+    function setBusy(busy) {
+      [submitButton, document.getElementById('googleButton'), document.getElementById('appleButton')].forEach(b => b.disabled = busy);
+    }
+    function updateMode() {
+      const signup = mode === 'signup';
+      const reset = mode === 'reset';
+      title.textContent = signup ? 'Create an account' : reset ? 'Reset your password' : 'Welcome back';
+      subtitle.textContent = signup ? 'Join PIXORA to discover and download creative designs.' : reset ? 'We will email you a secure password reset link.' : 'Log in to continue to your PIXORA account.';
+      nameField.hidden = !signup;
+      nameField.required = signup;
+      passwordField.hidden = reset;
+      passwordField.required = !reset;
+      passwordField.autocomplete = signup ? 'new-password' : 'current-password';
+      passwordField.placeholder = signup ? 'Create a password (min. 8 characters)' : 'Enter your password';
+      submitButton.textContent = signup ? 'Create account' : reset ? 'Send reset link' : 'Log in';
+      newsletterRow.hidden = !signup;
+      document.getElementById('termsText').hidden = !signup;
+      document.getElementById('dividerText').textContent = reset ? 'Reset using email' : 'Or continue with email';
+      switchPrompt.textContent = signup ? 'Already have an account?' : reset ? 'Remembered your password?' : "Don't have an account?";
+      switchLink.textContent = signup ? 'Log in' : reset ? 'Back to log in' : 'Sign up';
+      forgotRow.hidden = signup || reset;
+      document.getElementById('googleButton').hidden = reset;
+      document.getElementById('appleButton').hidden = reset;
+    }
+    function showAccount(user) {
+      // Keep the account details available briefly, then return to PIXORA home.
+      // The one-time flag prevents redirect loops when the page is revisited.
+      authSection.hidden = true;
+      accountPanel.style.display = 'block';
+      document.getElementById('accountName').textContent = 'Name: ' + (user.user_metadata?.full_name || user.user_metadata?.name || 'PIXORA user');
+      document.getElementById('accountEmail').textContent = 'Email: ' + (user.email || '');
+      const params = new URLSearchParams(window.location.search);
+      const cameFromAuth = params.has('code') || params.has('access_token') ||
+        sessionStorage.getItem('pixora_auth_redirect') === '1';
+      if (cameFromAuth) {
+        sessionStorage.removeItem('pixora_auth_redirect');
+        window.location.replace('index.html');
+      }
+    }
+    function showAuth() {
+      authSection.hidden = false;
+      accountPanel.style.display = 'none';
+    }
+
+    switchLink.addEventListener('click', e => {
+      e.preventDefault(); clearMessage();
+      mode = mode === 'signup' ? 'login' : mode === 'login' ? 'signup' : 'login';
+      updateMode();
+    });
+    document.getElementById('forgotButton').addEventListener('click', () => {
+      clearMessage(); mode = 'reset'; updateMode();
+    });
+
+    document.getElementById('accountForm').addEventListener('submit', async e => {
+      e.preventDefault(); clearMessage();
+      if (!isConfigured || !supabase) {
+        message('Authentication is not connected yet. Add your Supabase Project URL and publishable/anon key in this file, then configure Supabase Auth.', 'error');
+        return;
+      }
+      const email = emailField.value.trim();
+      setBusy(true);
+      try {
+        if (mode === 'signup') {
+          const { data, error } = await supabase.auth.signUp({
+            email, password: passwordField.value,
+            options: { data: { full_name: nameField.value.trim(), newsletter_opt_out: document.getElementById('newsletter').checked },
+              emailRedirectTo: window.location.origin + window.location.pathname }
+          });
+          if (error) throw error;
+          if (data.session && data.user) {
+            sessionStorage.setItem('pixora_auth_redirect', '1');
+            showAccount(data.user);
+            message('Your PIXORA account was created successfully.', 'success');
+          } else {
+            message('Account request received. Check your email to confirm the account before logging in.', 'success');
+            mode = 'login'; updateMode();
+          }
+        } else if (mode === 'login') {
+          const { data, error } = await supabase.auth.signInWithPassword({ email, password: passwordField.value });
+          if (error) throw error;
+          sessionStorage.setItem('pixora_auth_redirect', '1');
+          showAccount(data.user);
+          message('You are now logged in securely.', 'success');
+        } else {
+          const { error } = await supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: window.location.origin + window.location.pathname + '?reset-password=1'
+          });
+          if (error) throw error;
+          message('If an account exists for that email, a password reset link has been sent.', 'success');
+          mode = 'login'; updateMode();
+        }
+      } catch (err) {
+        message(err.message || 'Something went wrong. Please try again.', 'error');
+      } finally { setBusy(false); }
+    });
+
+    async function oauth(provider) {
+      clearMessage();
+      sessionStorage.setItem('pixora_auth_redirect', '1');
+      if (!isConfigured || !supabase) {
+        message('Authentication is not connected yet. Add your Supabase settings and enable this provider in Supabase Auth.', 'error');
+        return;
+      }
+      try {
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider,
+          options: { redirectTo: window.location.origin + window.location.pathname }
+        });
+        if (error) throw error;
+      } catch (err) { message(err.message || 'Could not start sign-in.', 'error'); }
+    }
+    document.getElementById('googleButton').addEventListener('click', () => oauth('google'));
+    document.getElementById('appleButton').addEventListener('click', () => oauth('apple'));
+    document.getElementById('logoutButton').addEventListener('click', async () => {
+      if (!supabase) return;
+      const { error } = await supabase.auth.signOut();
+      if (error) message(error.message, 'error');
+      else { showAuth(); mode = 'login'; updateMode(); clearMessage(); message('You have been logged out.', 'success'); }
+    });
+
+    if (isConfigured && window.supabase?.createClient) {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      supabase.auth.getSession().then(({ data, error }) => {
+        if (error) message(error.message, 'error');
+        else if (data.session?.user) showAccount(data.session.user);
+      });
+      supabase.auth.onAuthStateChange((_event, session) => {
+        if (session?.user) showAccount(session.user);
+        else showAuth();
+      });
+      // If redirected from a password reset link, Supabase processes the session in the browser.
+      if (new URLSearchParams(location.search).has('reset-password')) {
+        message('Enter a new password after opening the secure reset link. Set a new password in your Supabase recovery flow.', 'success');
+      }
+    } else {
+      message('Setup needed: connect Supabase to enable real accounts, secure login, password reset and database-backed sessions.', 'error');
+    }
+    updateMode();
+    })();
+  </script>
+</body>
+</html>
+
     .field{display:block;width:100%;height:48px;margin:0 0 12px;padding:0 14px;border:1px solid #D7CEB9;border-radius:9px;background:var(--white);color:var(--ink);font:inherit;font-size:14px;outline:none}
     .field::placeholder{color:#8A8376}.field:focus{border-color:var(--gold);box-shadow:0 0 0 3px #A88C4C22}
     .continue{width:100%;min-height:48px;border:0;border-radius:9px;background:var(--ink);color:var(--cream);font:inherit;font-size:14px;font-weight:750;cursor:pointer;margin-top:1px}
