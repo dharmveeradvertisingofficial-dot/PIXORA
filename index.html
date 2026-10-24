@@ -2,11 +2,10 @@
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#FFF8E1"><meta name="description" content="PIXORA — Maharashtra-inspired creative design marketplace"><title>Home | PIXORA</title><link rel="icon" href="assets/pixora-logo.png"><link rel="stylesheet" href="styles.css"></head>
 <body>
-<!-- १. z-index: 980 केला (ज्यामुळे हा साईडबारच्या मागे राहील आणि बॅकग्राउंडला डिम करेल) -->
-<div id="sidebarOverlay" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); z-index:980; display:none;"></div>
+<!-- १. सुरुवातीला हा पडदा z-index: -1 मुळे मागे राहील, ज्यामुळे लॉगिन आणि मेनू बटनवर क्लिक करता येईल -->
+<div id="sidebarOverlay" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); z-index:-1; display:none;"></div>
 
-<!-- २. z-index: 990 इनलाईन दिला जेणेकरून साईडबार पडद्याच्या वर स्पष्ट दिसेल आणि लिंक्स क्लिक होतील -->
-<aside class="sidebar" id="sidebar" style="z-index: 990;"><a class="brand" href="index.html"><img src="assets/pixora-logo.png" alt="PIXORA logo"><span>PIXORA</span></a><a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a><nav class="main-nav" aria-label="Main navigation"><a class="nav-link active" href="index.html"><span class="nav-icon">⌂</span><span>Home</span></a>
+<aside class="sidebar" id="sidebar" style="z-index: 9999;"><a class="brand" href="index.html"><img src="assets/pixora-logo.png" alt="PIXORA logo"><span>PIXORA</span></a><a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a><nav class="main-nav" aria-label="Main navigation"><a class="nav-link active" href="index.html"><span class="nav-icon">⌂</span><span>Home</span></a>
 <a class="nav-link " href="search.html"><span class="nav-icon">⌕</span><span>Search</span></a>
 <a class="nav-link " href="stock.html"><span class="nav-icon">▧</span><span>Stock</span></a>
 <a class="nav-link " href="explore.html"><span class="nav-icon">✧</span><span>Explore</span></a>
@@ -23,7 +22,7 @@
 <footer class="footer"><a class="footer-brand" href="index.html">PIXORA</a><span>Designed for Maharashtra's creative community.</span><a href="contact.html">Contact</a><span>© 2026 PIXORA</span></footer></main>
 <script src="script.js"></script>
 
-<!-- ३. पडदा मॅनेज करणारी मास्टर स्क्रिप्ट -->
+<!-- २. सुधारित मास्टर स्क्रिप्ट: जो योग्य वेळीच पडदा समोर आणेल आणि बंद झाल्यावर पूर्णपणे हटवून टाकेल -->
 <script>
 (function() {
     const mobMenuBtn = document.getElementById('menuButton');
@@ -31,21 +30,27 @@
     const mobOverlay = document.getElementById('sidebarOverlay');
 
     if (mobMenuBtn && mobSidebar && mobOverlay) {
+        // थ्री-लाईनवर क्लिक केल्यावर
         mobMenuBtn.addEventListener('click', function() {
             if (window.innerWidth <= 768) {
+                // तुमच्या script.js ला चालू व्हायला ५०ms वेळ देऊन पडद्याची पोझिशन सेट करतो
                 setTimeout(() => {
                     if (mobSidebar.classList.contains('open')) {
+                        mobOverlay.style.zIndex = '999'; // साईडबारच्या मागे पण स्क्रीनच्या पुढे
                         mobOverlay.style.display = 'block';
                     } else {
                         mobOverlay.style.display = 'none';
+                        mobOverlay.style.zIndex = '-1'; // परत मागे ढकलून बटन मोकळे करणे
                     }
                 }, 50);
             }
         });
 
+        // जेव्हा बाहेर कुठेही (पडद्यावर) टच होईल तेव्हा साईडबार सुरक्षित बंद करणे
         mobOverlay.addEventListener('click', function() {
             mobSidebar.classList.remove('open');
             mobOverlay.style.display = 'none';
+            mobOverlay.style.zIndex = '-1'; // लॉगिन बटन मोकळे करण्यासाठी मागे ढकलले
         });
     }
 })();
