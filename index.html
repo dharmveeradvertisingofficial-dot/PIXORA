@@ -2,6 +2,9 @@
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#FFF8E1"><meta name="description" content="PIXORA — Maharashtra-inspired creative design marketplace"><title>Home | PIXORA</title><link rel="icon" href="assets/pixora-logo.png"><link rel="stylesheet" href="styles.css"></head>
 <body>
+<!-- १. हा नवीन पडदा (Overlay) जो बाहेर कुठेही टच केल्यास साईडबार बंद करेल -->
+<div id="sidebarOverlay" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); z-index:99; display:none;"></div>
+
 <aside class="sidebar" id="sidebar"><a class="brand" href="index.html"><img src="assets/pixora-logo.png" alt="PIXORA logo"><span>PIXORA</span></a><a class="create-button" href="creator.html"><span>＋</span> Create / Upload</a><nav class="main-nav" aria-label="Main navigation"><a class="nav-link active" href="index.html"><span class="nav-icon">⌂</span><span>Home</span></a>
 <a class="nav-link " href="search.html"><span class="nav-icon">⌕</span><span>Search</span></a>
 <a class="nav-link " href="stock.html"><span class="nav-icon">▧</span><span>Stock</span></a>
@@ -19,23 +22,35 @@
 <footer class="footer"><a class="footer-brand" href="index.html">PIXORA</a><span>Designed for Maharashtra's creative community.</span><a href="contact.html">Contact</a><span>© 2026 PIXORA</span></footer></main>
 <script src="script.js"></script>
 
-<!-- फक्त मोबाईलवर बाहेर क्लिक केल्यावर साईडबार बंद करण्यासाठी कोड -->
+<!-- २. मास्टर जावास्क्रिप्ट जो बाहेर टच केल्यावर पडद्याच्या मदतीने साईडबार अचूक बंद करेल -->
 <script>
-document.addEventListener('click', function(event) {
-    // फक्त मोबाईल स्क्रीनसाठी (768px पेक्षा कमी रुंदी)
-    if (window.innerWidth <= 768) {
-        const mobSidebar = document.getElementById('sidebar');
-        const mobMenuButton = document.getElementById('menuButton');
-        
-        // जर मोबाईलवर साईडबार उघडा असेल (त्याला active क्लास असेल)
-        // आणि युझरने साईडबार किंवा थ्री-लाईन बटन सोडून बाहेर कुठेही टच केले असेल
-        if (mobSidebar && mobSidebar.classList.contains('active')) {
-            if (!mobSidebar.contains(event.target) && event.target !== mobMenuButton && !mobMenuButton.contains(event.target)) {
-                mobSidebar.classList.remove('active');
+(function() {
+    const mobMenuBtn = document.getElementById('menuButton');
+    const mobSidebar = document.getElementById('sidebar');
+    const mobOverlay = document.getElementById('sidebarOverlay');
+
+    if (mobMenuBtn && mobSidebar && mobOverlay) {
+        // जेव्हा थ्री-लाईन (☰) वर क्लिक होईल
+        mobMenuBtn.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                // तुमच्या script.js मधील .open क्लासToggle व्हायला ५०ms चा वेळ देऊन पडदा दाखवतो
+                setTimeout(() => {
+                    if (mobSidebar.classList.contains('open')) {
+                        mobOverlay.style.display = 'block';
+                    } else {
+                        mobOverlay.style.display = 'none';
+                    }
+                }, 50);
             }
-        }
+        });
+
+        // जेव्हा बाहेर कुठेही (पडद्यावर) टच होईल तेव्हा साईडबार आणि पडदा दोन्ही बंद करणे
+        mobOverlay.addEventListener('click', function() {
+            mobSidebar.classList.remove('open');
+            mobOverlay.style.display = 'none';
+        });
     }
-});
+})();
 </script>
 </body>
 </html>
