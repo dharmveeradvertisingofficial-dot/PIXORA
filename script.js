@@ -1,24 +1,8 @@
-const menuButton = document.getElementById('menuButton');
-const sidebar = document.getElementById('sidebar');
-
-if (menuButton && sidebar) {
-    // थ्री-लाईनवर क्लिक केल्यावर साईडबार उघडणे/बंद करणे (जसा आधी होता तसाच)
-    menuButton.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-    });
-
-    // साईडबारमधील कोणत्याही लिंकवर क्लिक केल्यास तो बंद करणे
-    document.querySelectorAll('.sidebar a').forEach(a => {
-        a.addEventListener('click', () => sidebar.classList.remove('open'));
-    });
-}
-
-/* --- इथून पुढे तुमचा शोध (Search) चा मूळ कोड सुरक्षित आहे --- */
+const menuButton=document.getElementById('menuButton');const sidebar=document.getElementById('sidebar');if(menuButton&&sidebar){menuButton.addEventListener('click',()=>sidebar.classList.toggle('open'));document.querySelectorAll('.sidebar a').forEach(a=>a.addEventListener('click',()=>sidebar.classList.remove('open')))}
 const form=document.getElementById('searchForm');if(form){const input=document.getElementById('q');const results=document.getElementById('results');const message=document.getElementById('searchMessage');const items=[{title:'Ganesh Festival Creative',category:'Festival',href:'festival.html',className:'p1',label:'गणेशोत्सव'},{title:'Marathi Event Banner',category:'Banner',href:'banners.html',className:'p2',label:'महाराष्ट्र'},{title:'Warm Abstract Background',category:'Background',href:'backgrounds.html',className:'p3',label:'Abstract'}];const params=new URLSearchParams(location.search);if(input)input.value=params.get('q')||'';function runSearch(e){if(e)e.preventDefault();const q=(input.value||'').toLowerCase().trim();const found=items.filter(x=>(x.title+' '+x.category+' '+x.label).toLowerCase().includes(q));results.innerHTML=found.map(x=>`<a class="design-card" href="${x.href}"><div class="preview ${x.className}"><strong>${x.label}</strong></div><b>${x.title}</b><small>Sample preview · Demo</small></a>`).join('');message.textContent=found.length?`${found.length} sample result(s).`:'No sample designs found. Try “festival”, “banner” or “background”.';}form.addEventListener('submit',runSearch);if(input&&input.value)runSearch();}
-
-/* --- PIXORA account menu + authenticated creator upload --- */
+/* PIXORA account menu + authenticated creator upload */
 (function(){
- const SUPABASE_URL='https://supabase.co';
+ const SUPABASE_URL='https://gvqhwcnaycxjrlyycbci.supabase.co';
  const SUPABASE_ANON_KEY='sb_publishable_2Xb08RsHWptXCIxc_R8Iow_Gzmkb-m0';
  const menuButton=document.getElementById('profileMenuButton');
  const menu=document.getElementById('profileMenu');
@@ -42,13 +26,13 @@ const form=document.getElementById('searchForm');if(form){const input=document.g
    const collections=document.getElementById('collectionsStatus');if(collections)collections.textContent=user?'Signed in as '+(user.email||'PIXORA user')+'. Saved collections require the database setup in PIXORA-SUPABASE-SETUP.sql.':'Sign in to view your collections.';
  }
  if(window.supabase?.createClient){client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);client.auth.getSession().then(({data})=>setMenuUser(data.session?.user||null));client.auth.onAuthStateChange((_event,session)=>setMenuUser(session?.user||null));}
- else {const sc=document.createElement('script');sc.src='https://jsdelivr.net>{client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);client.auth.getSession().then(({data})=>setMenuUser(data.session?.user||null));client.auth.onAuthStateChange((_event,session)=>setMenuUser(session?.user||null));};document.head.appendChild(sc);}
+ else {const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';sc.onload=()=>{client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);client.auth.getSession().then(({data})=>setMenuUser(data.session?.user||null));client.auth.onAuthStateChange((_event,session)=>setMenuUser(session?.user||null));};document.head.appendChild(sc);}
  const logout=document.getElementById('menuLogoutButton');if(logout)logout.addEventListener('click',async()=>{if(!client){location.href='account.html';return;}const {error}=await client.auth.signOut();if(error)alert(error.message);else location.href='index.html';});
  const uploadForm=document.getElementById('designUploadForm');
  if(uploadForm)uploadForm.addEventListener('submit',async e=>{
    e.preventDefault();const msg=document.getElementById('uploadMessage');msg.textContent='';
    if(!client||!currentUser){msg.textContent='Please log in first using Google or email.';return;}
-   const file=document.getElementById('designFile').files;if(!file)return;
+   const file=document.getElementById('designFile').files[0];if(!file)return;
    if(file.size>25*1024*1024){msg.textContent='File must be 25 MB or smaller.';return;}
    const allowed=['image/jpeg','image/png','image/svg+xml','application/pdf',''];if(!allowed.includes(file.type)&&!(/\.(psd)$/i.test(file.name))){msg.textContent='Please choose JPG, PNG, SVG, PDF or PSD.';return;}
    const btn=uploadForm.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Uploading…';
@@ -64,17 +48,3 @@ const form=document.getElementById('searchForm');if(form){const input=document.g
    finally{btn.disabled=!currentUser;btn.textContent='Upload design';}
  });
 })();
-
-// --- फक्त मोबाईलवर बाहेर क्लिक केल्यावर बंद होण्यासाठी सर्वात सुरक्षित जागतिक लॉजिक ---
-document.addEventListener('click', function(e) {
-    if (window.innerWidth <= 768) {
-        const side = document.getElementById('sidebar');
-        const btn = document.getElementById('menuButton');
-        // जर साईडबार ओपन असेल, आणि क्लिक साईडबार किंवा थ्री-लाईन बटनच्या आत नसेल तरच बंद करा
-        if (side && side.classList.contains('open')) {
-            if (!side.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
-                side.classList.remove('open');
-            }
-        }
-    }
-});
