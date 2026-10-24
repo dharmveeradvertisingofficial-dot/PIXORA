@@ -2,25 +2,14 @@ const menuButton = document.getElementById('menuButton');
 const sidebar = document.getElementById('sidebar');
 
 if (menuButton && sidebar) {
-    // थ्री-लाईनवर क्लिक केल्यावर साईडबार उघडणे/बंद करणे
-    menuButton.addEventListener('click', (event) => {
+    // थ्री-लाईनवर क्लिक केल्यावर साईडबार उघडणे/बंद करणे (जसा आधी होता तसाच)
+    menuButton.addEventListener('click', () => {
         sidebar.classList.toggle('open');
-        event.stopPropagation(); // हे क्लिक बाहेर जाण्यापासून रोखतं, ज्यामुळे साईडबार लगेच बंद होत नाही
     });
 
     // साईडबारमधील कोणत्याही लिंकवर क्लिक केल्यास तो बंद करणे
     document.querySelectorAll('.sidebar a').forEach(a => {
         a.addEventListener('click', () => sidebar.classList.remove('open'));
-    });
-
-    // मोबाईलवर बाहेर कुठेही क्लिक किंवा टच केल्यावर साईडबार बंद करणे
-    document.addEventListener('click', (event) => {
-        if (window.innerWidth <= 768) { // फक्त मोबाईल स्क्रीनसाठी
-            // जर साईडबार उघडा असेल, आणि क्लिक साईडबारच्या किंवा मेनू बटनच्या आत झाले नसेल, तरच बंद करा
-            if (sidebar.classList.contains('open') && !sidebar.contains(event.target) && event.target !== menuButton) {
-                sidebar.classList.remove('open');
-            }
-        }
     });
 }
 
@@ -34,7 +23,7 @@ const form=document.getElementById('searchForm');if(form){const input=document.g
  const menuButton=document.getElementById('profileMenuButton');
  const menu=document.getElementById('profileMenu');
  if(menuButton&&menu){
-   menuButton.addEventListener('click',(e)=>{const open=menu.hidden;menu.hidden=!open;menuButton.setAttribute('aria-expanded',String(open)); e.stopPropagation();});
+   menuButton.addEventListener('click',()=>{const open=menu.hidden;menu.hidden=!open;menuButton.setAttribute('aria-expanded',String(open));});
    document.addEventListener('click',e=>{if(!e.target.closest('.profile-menu-wrap')){menu.hidden=true;menuButton.setAttribute('aria-expanded','false');}});
  }
  let client=null, currentUser=null;
@@ -59,7 +48,7 @@ const form=document.getElementById('searchForm');if(form){const input=document.g
  if(uploadForm)uploadForm.addEventListener('submit',async e=>{
    e.preventDefault();const msg=document.getElementById('uploadMessage');msg.textContent='';
    if(!client||!currentUser){msg.textContent='Please log in first using Google or email.';return;}
-   const file=document.getElementById('designFile').files[0];if(!file)return;
+   const file=document.getElementById('designFile').files;if(!file)return;
    if(file.size>25*1024*1024){msg.textContent='File must be 25 MB or smaller.';return;}
    const allowed=['image/jpeg','image/png','image/svg+xml','application/pdf',''];if(!allowed.includes(file.type)&&!(/\.(psd)$/i.test(file.name))){msg.textContent='Please choose JPG, PNG, SVG, PDF or PSD.';return;}
    const btn=uploadForm.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Uploading…';
@@ -75,3 +64,17 @@ const form=document.getElementById('searchForm');if(form){const input=document.g
    finally{btn.disabled=!currentUser;btn.textContent='Upload design';}
  });
 })();
+
+// --- फक्त मोबाईलवर बाहेर क्लिक केल्यावर बंद होण्यासाठी सर्वात सुरक्षित जागतिक लॉजिक ---
+document.addEventListener('click', function(e) {
+    if (window.innerWidth <= 768) {
+        const side = document.getElementById('sidebar');
+        const btn = document.getElementById('menuButton');
+        // जर साईडबार ओपन असेल, आणि क्लिक साईडबार किंवा थ्री-लाईन बटनच्या आत नसेल तरच बंद करा
+        if (side && side.classList.contains('open')) {
+            if (!side.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+                side.classList.remove('open');
+            }
+        }
+    }
+});
